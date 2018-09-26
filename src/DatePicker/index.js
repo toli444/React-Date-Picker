@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import moment from 'moment';
-import styles from './styles.css';
+import styles from './styles.less';
 
 import SingleArrow from './components/SingleArrow';
 import DoubleArrow from './components/DoubleArrow';

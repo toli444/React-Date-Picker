@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import DatePicker from './DatePicker/index';
 
-import styles from './App.css';
+import styles from './App.less';
 
 class App extends Component {
   render() {

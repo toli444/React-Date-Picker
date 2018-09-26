@@ -1,0 +1,6 @@
+.main-page {
+    display: flex;
+    justify-content: center;
+    background-color: #737373;
+    min-height: 100%;
+}

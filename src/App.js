@@ -7,7 +7,9 @@ class App extends Component {
   render() {
     return (
       <div className={styles['main-page']}>
-        <DatePicker />
+          <div className={styles['date-picker-wrapper']}>
+            <DatePicker />
+          </div>
       </div>
     );
   }

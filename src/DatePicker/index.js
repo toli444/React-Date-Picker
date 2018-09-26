@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+ import React, {Component} from 'react';
 import moment from 'moment';
 import styles from './styles.less';
 
@@ -8,41 +8,83 @@ import DoubleArrow from './components/DoubleArrow';
 class DatePicker extends Component {
   static defaultProps = {
     date: '11-11-2011',
+    maxDate: '11-11-2014',
+    minDate: '11-11-2008',
     format: 'DD-MM-YYYY',
   };
+
+  blurTimeout = null;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedDate: props.date ? moment(props.date).format(props.format) : '',
+      currentDate: props.date ? moment(props.date, props.format) : '',
       isCalendarShown: false,
     };
   }
 
-  subDate = () => {
+  isNewDateValid(newDate) {
+    const {maxDate, minDate, format} = this.props;
+
+    return newDate.isBetween(moment(minDate, format), moment(maxDate, format));
+  }
+
+
+  addDate(amount, unit) {
+    const { format } = this.props;
+    const { currentDate } = this.state;
+    const newDate = moment(currentDate, format).add(amount, unit);
+
+    if (this.isNewDateValid(newDate)) {
+      this.setState({currentDate: newDate})
+    }
+  }
+
+
+  subDate(amount, unit) {
+    const { format } = this.props;
+    const { currentDate } = this.state;
+    const newDate = moment(currentDate, format).subtract(amount, unit);
+
+    if (this.isNewDateValid(newDate)) {
+      this.setState({currentDate: newDate})
+    }
+  }
+
+  onBlurHandler = () => {
+    this.blurTimeout = setTimeout(() => {
+      this.setState({
+        isCalendarShown: false
+      });
+    });
   };
 
-  toggleCalendarShown = (isCalendarShown) => {
-    this.setState({isCalendarShown});
+  onFocusHandler = () => {
+    clearTimeout(this.blurTimeout);
+    this.setState({
+      isCalendarShown: true
+    });
   };
 
   render() {
-    const {selectedDate, isCalendarShown} = this.state;
+    const { format } = this.props;
+    const {currentDate, isCalendarShown} = this.state;
 
     return (
-      <div className={styles['date-picker']}>
-        <div>
-          <input
-            type="text"
-            className="selected-date"
-            value={selectedDate}
-            onFocus={() => this.toggleCalendarShown(true)}
-            onBlur={() => this.toggleCalendarShown(false)}
-          />
-        </div>
-        {isCalendarShown && <div>
-          <div className={styles['calendar-heading']}>
+      <div
+        className={styles['date-picker']}
+        onFocus={this.onFocusHandler}
+        onBlur={this.onBlurHandler}
+        tabIndex="0"
+      >
+        <input
+          type="text"
+          className="selected-date"
+          value={currentDate.format(format)}
+        />
+        {isCalendarShown && <div className={styles.calendar}>
+          <div className={styles.heading}>
             <DoubleArrow
               left
               onClick={() => this.subDate(1, 'year')}

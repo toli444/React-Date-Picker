@@ -1,5 +1,5 @@
 @selected-day-color: #6cbfff;
-@another-month-day-color: #c3c3c3;
+@another-month-day-color: #dadada;
 
 .days-chooser {
   border: 1px solid #008cdc;
@@ -21,8 +21,30 @@
       background-color: lighten(@selected-day-color, 15%);
     }
 
-    &.selected {
-      background-color: #6cbfff;
+    &.disabled,
+    &.disabled.another-month {
+      pointer-events: none;
+      background-color: #6c6c6c;
+
+      &.current {
+        background-color:  darken(@selected-day-color, 30%);
+      }
+    }
+
+    &.current {
+      background-color: lighten(@selected-day-color, 15%);
+
+      &:hover {
+        background-color: @selected-day-color;
+      }
+    }
+
+    &.selected,
+    &.selected.another-month,
+    &.selected.another-month:hover,
+    &.selected.current,
+    &.disabled.current.selected {
+      background-color: @selected-day-color;
     }
 
     &.another-month {

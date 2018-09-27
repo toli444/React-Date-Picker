@@ -8,6 +8,8 @@ import styles from './styles.less';
 class DaysChooser extends Component {
   static propTypes = {
     currentDate: PropTypes.object,
+    startDate: PropTypes.object,
+    endDate: PropTypes.object,
     onDateChange: PropTypes.func,
     minDate: PropTypes.object,
     maxDate: PropTypes.object,
@@ -46,23 +48,37 @@ class DaysChooser extends Component {
   }
 
   getAnotherMonthClass(day) {
-    return day.isCurrentMonth ? '' : styles['another-month']
+    return !day.isCurrentMonth && styles['another-month'];
   }
 
-  getCurrentDayClass(day, currentDate) {
-    return currentDate.isSame(day.value, 'day') ? styles.selected : ''
+  getCurrentDayClass(day) {
+    return this.props.currentDate.isSame(day.value, 'day') && styles.current;
   }
 
-  getDayClasses(day, currentDate) {
+  getBetweenDaysClass(day) {
+    const {startDate, endDate} = this.props;
+
+    return (day.value.isSameOrBefore(endDate) && day.value.isSameOrAfter(startDate)) && styles.selected ;
+  }
+
+  getDisabledDayClass(day) {
+    const {minDate, maxDate} = this.props;
+
+    return (day.value.isBefore(minDate) || day.value.isAfter(maxDate)) && styles.disabled;
+  }
+
+  getDayClasses(day) {
     return [
       styles.day,
       this.getAnotherMonthClass(day),
-      this.getCurrentDayClass(day, currentDate)
+      this.getCurrentDayClass(day),
+      this.getDisabledDayClass(day),
+      this.getBetweenDaysClass(day),
     ].filter(Boolean).join(' ');
   }
 
   render() {
-    const {currentDate, onDateChange, minDate, maxDate, format} = this.props;
+    const {currentDate, onDateChange, format} = this.props;
     const daysToShow = this.getDaysToShow(moment(currentDate, format));
     const combinedDaysByWeeks = this.getCombinedDaysByWeeks(daysToShow, currentDate);
 
@@ -74,7 +90,7 @@ class DaysChooser extends Component {
               {week.map(day => {
                 return (
                   <span
-                    className={this.getDayClasses(day, currentDate)}
+                    className={this.getDayClasses(day)}
                     key={day.formattedValue}
                     onClick={() => onDateChange(day.value)}
                   >

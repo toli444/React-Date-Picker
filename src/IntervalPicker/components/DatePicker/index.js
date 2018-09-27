@@ -11,18 +11,13 @@ import DaysChooser from '../choosers/DaysChooser';
 
 class DatePicker extends Component {
   static propTypes = {
-    date: PropTypes.object,
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
+    value: PropTypes.object,
+    startDate: PropTypes.object,
+    endDate: PropTypes.object,
+    minDate: PropTypes.object,
+    maxDate: PropTypes.object,
     format: PropTypes.string,
     onDateChange: PropTypes.func,
-  };
-
-  static defaultProps = {
-    date: '11-11-2011',
-    maxDate: '11-11-2014',
-    minDate: '11-11-2008',
-    format: 'DD-MM-YYYY',
   };
 
   blurTimeout = null;
@@ -32,38 +27,33 @@ class DatePicker extends Component {
 
     this.containerRef = React.createRef();
     this.state = {
-      currentDate: props.date ? moment(props.date, props.format) : '',
+      currentDate: this.getCurrentDate(),
       isFocusIn: false,
       editingUnit: null,
     };
   }
 
-  isNewDateValid(newDate) {
-    const {maxDate, minDate, format} = this.props;
+  getCurrentDate() {
+    const {value, startDate, format} = this.props;
+    const actualValue = value || startDate;
 
-    return newDate.isBetween(moment(minDate, format), moment(maxDate, format));
+    return actualValue ? moment(actualValue, format) : null
   }
-
 
   addDate(amount, unit) {
     const {format} = this.props;
     const {currentDate} = this.state;
     const newDate = moment(currentDate, format).add(amount, unit);
 
-    if (this.isNewDateValid(newDate)) {
-      this.setState({currentDate: newDate, editingUnit: unit})
-    }
+    this.setState({currentDate: newDate, editingUnit: unit})
   }
-
 
   subDate(amount, unit) {
     const {format} = this.props;
     const {currentDate} = this.state;
     const newDate = moment(currentDate, format).subtract(amount, unit);
 
-    if (this.isNewDateValid(newDate)) {
-      this.setState({currentDate: newDate, editingUnit: unit})
-    }
+    this.setState({currentDate: newDate, editingUnit: unit})
   }
 
   focusMe() {
@@ -80,9 +70,13 @@ class DatePicker extends Component {
 
   onFocusHandler = () => {
     clearTimeout(this.blurTimeout);
-    this.setState({
-      isFocusIn: true
-    });
+
+    if (!this.state.isFocusIn) {
+      this.setState({
+        isFocusIn: true,
+        currentDate: this.getCurrentDate(),
+      });
+    }
   };
 
   handleDateChange = newDate => {
@@ -91,8 +85,10 @@ class DatePicker extends Component {
   };
 
   render() {
-    const {format, date} = this.props;
+    const {format, value, startDate, endDate, minDate, maxDate} = this.props;
     const {currentDate, isFocusIn, editingUnit} = this.state;
+
+    debugger;
 
     return (
       <div
@@ -105,7 +101,7 @@ class DatePicker extends Component {
         <input
           type="text"
           className="selected-date"
-          value={date.format(format)}
+          value={value ? value.format(format) : ''}
           readOnly
         />
         {isFocusIn && <div className={styles.calendar}>
@@ -116,7 +112,14 @@ class DatePicker extends Component {
             <SingleArrow onClick={() => this.addDate(1, 'month')}/>
             <DoubleArrow onClick={() => this.addDate(1, 'year')}/>
           </div>
-          {<DaysChooser currentDate={currentDate} onDateChange={this.handleDateChange}/>}
+          {<DaysChooser
+            currentDate={currentDate}
+            startDate={startDate}
+            endDate={endDate}
+            onDateChange={this.handleDateChange}
+            minDate={minDate}
+            maxDate={maxDate}
+          />}
         </div>
         }
       </div>

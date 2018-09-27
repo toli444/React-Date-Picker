@@ -29,8 +29,8 @@ class IntervalPicker extends Component {
     super(props);
 
     this.state = {
-      startDate: props.startDate ? moment(props.startDate, props.format) : '',
-      endDate: props.endDate ? moment(props.endDate, props.format) : '',
+      startDate: props.startDate ? moment(props.startDate, props.format) : null,
+      endDate: props.endDate ? moment(props.endDate, props.format) : null,
     };
 
     this.endDatePickerRef = React.createRef();
@@ -38,7 +38,14 @@ class IntervalPicker extends Component {
 
   onStartDateChange = value => {
     this.setState({startDate: value});
-    this.endDatePickerRef.current.focusMe();
+
+    if (value.isSameOrAfter(this.state.endDate)) {
+      this.setState({endDate: null}, () => {
+        this.endDatePickerRef.current.focusMe();
+      });
+    } else {
+      this.endDatePickerRef.current.focusMe();
+    }
   };
 
   onEndDateChange = value => {
@@ -46,17 +53,28 @@ class IntervalPicker extends Component {
   };
 
   render() {
+    const {minDate, maxDate, format} = this.props;
     const {startDate, endDate} = this.state;
 
     return (
       <div className={styles['interval-picker']}>
         <DatePicker
-          date={startDate}
+          value={startDate}
+          startDate={startDate}
+          endDate={endDate}
           onDateChange={value => this.onStartDateChange(value)}
+          minDate={moment(minDate, format)}
+          maxDate={moment(maxDate, format)}
+          format={format}
         />
         <DatePicker
-          date={endDate}
+          value={endDate}
+          startDate={startDate}
+          endDate={endDate}
           onDateChange={value => this.onEndDateChange(value)}
+          minDate={moment(startDate)}
+          maxDate={moment(maxDate, format)}
+          format={format}
           ref={this.endDatePickerRef}
         />
       </div>

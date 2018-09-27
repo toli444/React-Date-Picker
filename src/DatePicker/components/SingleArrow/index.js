@@ -1,7 +1,17 @@
 import React from 'react';
 import styles from './styles.less';
+import PropTypes from 'prop-types';
 
-export default function SingleArrow({left, onClick}) {
+const SingleArrow = ({left, onClick}) => {
   return <div onClick={onClick} className={styles['double-arrow']}>{left ? '<' : '>'}</div>;
 };
+
+SingleArrow.propTypes = {
+  left: PropTypes.bool,
+  onClick: PropTypes.func,
+};
+
+export default SingleArrow;
+
+
 

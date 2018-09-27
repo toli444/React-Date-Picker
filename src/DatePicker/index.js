@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import moment from 'moment';
+import PropTypes from 'prop-types';
+
 import styles from './styles.less';
 
 import SingleArrow from './components/SingleArrow';
@@ -8,8 +10,15 @@ import EditingDateInput from './components/EditingDateInput';
 import DaysChooser from './components/choosers/DaysChooser';
 
 class DatePicker extends Component {
+  static propTypes = {
+    currentDate: PropTypes.string,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
+    format: PropTypes.string,
+  };
+
   static defaultProps = {
-    date: '11-11-2011',
+    currentDate: '11-11-2011',
     maxDate: '11-11-2014',
     minDate: '11-11-2008',
     format: 'DD-MM-YYYY',
@@ -21,7 +30,7 @@ class DatePicker extends Component {
     super(props);
 
     this.state = {
-      currentDate: props.date ? moment(props.date, props.format) : '',
+      currentDate: props.currentDate ? moment(props.currentDate, props.format) : '',
       isCalendarShown: false,
       editingUnit: null,
     };

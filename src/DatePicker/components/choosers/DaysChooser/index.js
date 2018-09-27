@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import moment from 'moment';
 import _ from 'lodash';
@@ -5,6 +6,14 @@ import _ from 'lodash';
 import styles from './styles.less';
 
 class DaysChooser extends Component {
+  static propTypes = {
+    currentDate: PropTypes.object,
+    onDateChange: PropTypes.func,
+    minDate: PropTypes.object,
+    maxDate: PropTypes.object,
+    format: PropTypes.string,
+  };
+
   getDaysToShow(currentDate) {
     const startOfMonth = moment(currentDate).startOf('month');
     const endOfMonth = moment(currentDate).endOf('month');
@@ -79,5 +88,9 @@ class DaysChooser extends Component {
     );
   }
 }
+
+DaysChooser.propTypes = {
+
+};
 
 export default DaysChooser;

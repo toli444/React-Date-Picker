@@ -1,3 +1,6 @@
+@selected-day-color: #6cbfff;
+@another-month-day-color: #c3c3c3;
+
 .days-chooser {
   border: 1px solid #008cdc;
 
@@ -14,12 +17,20 @@
     justify-content: center;
     cursor: pointer;
 
+    &:hover {
+      background-color: lighten(@selected-day-color, 15%);
+    }
+
     &.selected {
       background-color: #6cbfff;
     }
 
     &.another-month {
-      background-color: #c3c3c3;
+      background-color: @another-month-day-color;
+
+      &:hover {
+        background-color: darken(@another-month-day-color, 15%);
+      }
     }
   }
 }

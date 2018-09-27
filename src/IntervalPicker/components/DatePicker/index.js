@@ -4,21 +4,22 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.less';
 
-import SingleArrow from './components/SingleArrow';
-import DoubleArrow from './components/DoubleArrow';
-import EditingDateInput from './components/EditingDateInput';
-import DaysChooser from './components/choosers/DaysChooser';
+import SingleArrow from '../SingleArrow';
+import DoubleArrow from '../DoubleArrow';
+import EditingDateInput from '../EditingDateInput';
+import DaysChooser from '../choosers/DaysChooser';
 
 class DatePicker extends Component {
   static propTypes = {
-    currentDate: PropTypes.string,
+    date: PropTypes.object,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     format: PropTypes.string,
+    onDateChange: PropTypes.func,
   };
 
   static defaultProps = {
-    currentDate: '11-11-2011',
+    date: '11-11-2011',
     maxDate: '11-11-2014',
     minDate: '11-11-2008',
     format: 'DD-MM-YYYY',
@@ -29,9 +30,10 @@ class DatePicker extends Component {
   constructor(props) {
     super(props);
 
+    this.containerRef = React.createRef();
     this.state = {
-      currentDate: props.currentDate ? moment(props.currentDate, props.format) : '',
-      isCalendarShown: false,
+      currentDate: props.date ? moment(props.date, props.format) : '',
+      isFocusIn: false,
       editingUnit: null,
     };
   }
@@ -64,10 +66,14 @@ class DatePicker extends Component {
     }
   }
 
+  focusMe() {
+    this.containerRef.current.focus();
+  }
+
   onBlurHandler = () => {
     this.blurTimeout = setTimeout(() => {
       this.setState({
-        isCalendarShown: false
+        isFocusIn: false
       });
     });
   };
@@ -75,17 +81,18 @@ class DatePicker extends Component {
   onFocusHandler = () => {
     clearTimeout(this.blurTimeout);
     this.setState({
-      isCalendarShown: true
+      isFocusIn: true
     });
   };
 
   handleDateChange = newDate => {
-    this.setState({currentDate: newDate});
+    this.setState({currentDate: newDate, isFocusIn: false});
+    this.props.onDateChange(newDate);
   };
 
   render() {
-    const {format} = this.props;
-    const {currentDate, isCalendarShown, editingUnit} = this.state;
+    const {format, date} = this.props;
+    const {currentDate, isFocusIn, editingUnit} = this.state;
 
     return (
       <div
@@ -93,14 +100,15 @@ class DatePicker extends Component {
         onFocus={this.onFocusHandler}
         onBlur={this.onBlurHandler}
         tabIndex="0"
+        ref={this.containerRef}
       >
         <input
           type="text"
           className="selected-date"
-          value={currentDate.format(format)}
+          value={date.format(format)}
           readOnly
         />
-        {isCalendarShown && <div className={styles.calendar}>
+        {isFocusIn && <div className={styles.calendar}>
           <div className={styles.heading}>
             <DoubleArrow left onClick={() => this.subDate(1, 'year')}/>
             <SingleArrow left onClick={() => this.subDate(1, 'month')}/>

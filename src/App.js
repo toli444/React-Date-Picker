@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import DatePicker from './DatePicker/index';
+import IntervalPicker from './IntervalPicker/index';
 
 import styles from './App.less';
 
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div className={styles['main-page']}>
           <div className={styles['date-picker-wrapper']}>
-            <DatePicker />
+            <IntervalPicker />
           </div>
       </div>
     );

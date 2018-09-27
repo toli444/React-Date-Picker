@@ -1,9 +1,11 @@
- import React, {Component} from 'react';
+import React, {Component} from 'react';
 import moment from 'moment';
 import styles from './styles.less';
 
 import SingleArrow from './components/SingleArrow';
 import DoubleArrow from './components/DoubleArrow';
+import EditingDateInput from './components/EditingDateInput';
+import DaysChooser from './components/choosers/DaysChooser';
 
 class DatePicker extends Component {
   static defaultProps = {
@@ -21,6 +23,7 @@ class DatePicker extends Component {
     this.state = {
       currentDate: props.date ? moment(props.date, props.format) : '',
       isCalendarShown: false,
+      editingUnit: null,
     };
   }
 
@@ -32,23 +35,23 @@ class DatePicker extends Component {
 
 
   addDate(amount, unit) {
-    const { format } = this.props;
-    const { currentDate } = this.state;
+    const {format} = this.props;
+    const {currentDate} = this.state;
     const newDate = moment(currentDate, format).add(amount, unit);
 
     if (this.isNewDateValid(newDate)) {
-      this.setState({currentDate: newDate})
+      this.setState({currentDate: newDate, editingUnit: unit})
     }
   }
 
 
   subDate(amount, unit) {
-    const { format } = this.props;
-    const { currentDate } = this.state;
+    const {format} = this.props;
+    const {currentDate} = this.state;
     const newDate = moment(currentDate, format).subtract(amount, unit);
 
     if (this.isNewDateValid(newDate)) {
-      this.setState({currentDate: newDate})
+      this.setState({currentDate: newDate, editingUnit: unit})
     }
   }
 
@@ -67,9 +70,13 @@ class DatePicker extends Component {
     });
   };
 
+  handleDateChange = newDate => {
+    this.setState({currentDate: newDate});
+  };
+
   render() {
-    const { format } = this.props;
-    const {currentDate, isCalendarShown} = this.state;
+    const {format} = this.props;
+    const {currentDate, isCalendarShown, editingUnit} = this.state;
 
     return (
       <div
@@ -82,30 +89,17 @@ class DatePicker extends Component {
           type="text"
           className="selected-date"
           value={currentDate.format(format)}
+          readOnly
         />
         {isCalendarShown && <div className={styles.calendar}>
           <div className={styles.heading}>
-            <DoubleArrow
-              left
-              onClick={() => this.subDate(1, 'year')}
-            />
-            <SingleArrow
-              left
-              onClick={() => this.subDate(1, 'month')}
-            />
-            <input className="pick-month-year" value="ttt"/>
+            <DoubleArrow left onClick={() => this.subDate(1, 'year')}/>
+            <SingleArrow left onClick={() => this.subDate(1, 'month')}/>
+            <EditingDateInput currentDate={currentDate} editingUnit={editingUnit} format={format} />
             <SingleArrow onClick={() => this.addDate(1, 'month')}/>
             <DoubleArrow onClick={() => this.addDate(1, 'year')}/>
           </div>
-          {/*<CalendarBody*/}
-          {/*date={dateToEdit}*/}
-          {/*format={format}*/}
-          {/*maxDate={maxDate}*/}
-          {/*minDate={minDate}*/}
-          {/*onChange={(value, unit) => this.handleDateChange(value, unit)}*/}
-          {/*viewFor={setViewFor}*/}
-          {/*yearBlock={yearBlock}*/}
-          {/*/>*/}
+          {<DaysChooser currentDate={currentDate} onDateChange={this.handleDateChange}/>}
         </div>
         }
       </div>

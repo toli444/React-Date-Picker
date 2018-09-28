@@ -11,7 +11,8 @@
     "start": "node server.js",
     "localstart": "webpack-dev-server --open --mode development",
     "heroku-postbuild": "webpack -p",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -22,20 +23,30 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.0",
-    "babel-loader": "^8.0.2",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.0-beta.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "^5.6.0",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-only-warn": "^1.0.1",
     "eslint-plugin-react": "^7.11.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-test-renderer": "^16.5.2",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
@@ -47,5 +58,17 @@
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "path": "^0.12.7"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

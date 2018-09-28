@@ -52,9 +52,12 @@
     }
 
     &.selected,
-    &.selected.another-month,
-    &.selected.another-month:hover {
+    &.selected.another-month {
       background-color: @selected-day-color;
+
+      &:hover {
+        background-color: darken(@selected-day-color, 20%);
+      }
     }
 
     &.left-border {

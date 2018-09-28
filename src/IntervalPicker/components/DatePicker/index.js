@@ -18,6 +18,7 @@ class DatePicker extends Component {
     maxDate: PropTypes.object,
     format: PropTypes.string,
     onDateChange: PropTypes.func,
+    label: PropTypes.string,
   };
 
   blurTimeout = null;
@@ -56,7 +57,7 @@ class DatePicker extends Component {
     this.setState({currentDate: newDate, editingUnit: unit})
   }
 
-  focusMe() {
+  focusIn() {
     this.containerRef.current.focus();
   }
 
@@ -85,10 +86,8 @@ class DatePicker extends Component {
   };
 
   render() {
-    const {format, value, startDate, endDate, minDate, maxDate} = this.props;
+    const {format, value, startDate, endDate, minDate, maxDate, label} = this.props;
     const {currentDate, isFocusIn, editingUnit} = this.state;
-
-    debugger;
 
     return (
       <div
@@ -98,17 +97,20 @@ class DatePicker extends Component {
         tabIndex="0"
         ref={this.containerRef}
       >
-        <input
-          type="text"
-          className="selected-date"
-          value={value ? value.format(format) : ''}
-          readOnly
-        />
+        <div className={styles['selected-date-container']}>
+          <label>{label}</label>
+          <input
+            type="text"
+            className={styles['selected-date']}
+            value={value ? value.format(format) : ''}
+            readOnly
+          />
+        </div>
         {isFocusIn && <div className={styles.calendar}>
           <div className={styles.heading}>
             <DoubleArrow left onClick={() => this.subDate(1, 'year')}/>
             <SingleArrow left onClick={() => this.subDate(1, 'month')}/>
-            <EditingDateInput currentDate={currentDate} editingUnit={editingUnit} format={format} />
+            <EditingDateInput currentDate={currentDate} editingUnit={editingUnit} format={format}/>
             <SingleArrow onClick={() => this.addDate(1, 'month')}/>
             <DoubleArrow onClick={() => this.addDate(1, 'year')}/>
           </div>

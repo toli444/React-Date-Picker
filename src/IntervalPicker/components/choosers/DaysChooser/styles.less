@@ -2,7 +2,7 @@
 @another-month-day-color: #dadada;
 
 .days-chooser {
-  border: 1px solid #008cdc;
+  border-top: 1px solid #2a2a2a;
 
   .week {
     width: 100%;
@@ -10,7 +10,6 @@
   }
   .day {
     padding: 5px;
-    border: 1px solid #008cdc;
     width: 100%;
     display: flex;
     align-items: center;
@@ -24,27 +23,15 @@
     &.disabled,
     &.disabled.another-month {
       pointer-events: none;
-      background-color: #6c6c6c;
+      background-color: #8e8e8e;
 
       &.current {
         background-color:  darken(@selected-day-color, 30%);
+
+        &.selected {
+          background-color: @selected-day-color;
+        }
       }
-    }
-
-    &.current {
-      background-color: lighten(@selected-day-color, 15%);
-
-      &:hover {
-        background-color: @selected-day-color;
-      }
-    }
-
-    &.selected,
-    &.selected.another-month,
-    &.selected.another-month:hover,
-    &.selected.current,
-    &.disabled.current.selected {
-      background-color: @selected-day-color;
     }
 
     &.another-month {
@@ -53,6 +40,31 @@
       &:hover {
         background-color: darken(@another-month-day-color, 15%);
       }
+    }
+
+    &.current {
+      background-color: lighten(@selected-day-color, 15%);
+
+      &:hover,
+      &.selected {
+        background-color: @selected-day-color;
+      }
+    }
+
+    &.selected,
+    &.selected.another-month,
+    &.selected.another-month:hover {
+      background-color: @selected-day-color;
+    }
+
+    &.left-border {
+      border-top-left-radius: 50%;
+      border-bottom-left-radius: 50%;
+    }
+
+    &.right-border {
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 50%;
     }
   }
 }

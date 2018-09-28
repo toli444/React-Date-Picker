@@ -58,7 +58,23 @@ class DaysChooser extends Component {
   getBetweenDaysClass(day) {
     const {startDate, endDate} = this.props;
 
-    return (day.value.isSameOrBefore(endDate) && day.value.isSameOrAfter(startDate)) && styles.selected ;
+    return (day.value.isSameOrBefore(endDate) && day.value.isSameOrAfter(startDate)) && styles.selected;
+  }
+
+  getBorderDaysClass(day) {
+    const {startDate, endDate} = this.props;
+
+    if (day.value.isSame(startDate)) {
+      if (day.value.isSame(endDate)) {
+        return `${styles['left-border']} ${styles['right-border']}`;
+      }
+
+      return styles['left-border'];
+    }
+
+    if (day.value.isSame(endDate)) {
+      return styles['right-border'];
+    }
   }
 
   getDisabledDayClass(day) {
@@ -74,6 +90,7 @@ class DaysChooser extends Component {
       this.getCurrentDayClass(day),
       this.getDisabledDayClass(day),
       this.getBetweenDaysClass(day),
+      this.getBorderDaysClass(day),
     ].filter(Boolean).join(' ');
   }
 
@@ -105,8 +122,6 @@ class DaysChooser extends Component {
   }
 }
 
-DaysChooser.propTypes = {
-
-};
+DaysChooser.propTypes = {};
 
 export default DaysChooser;

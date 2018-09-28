@@ -41,15 +41,15 @@ class IntervalPicker extends Component {
 
     if (value.isSameOrAfter(this.state.endDate)) {
       this.setState({endDate: null}, () => {
-        this.endDatePickerRef.current.focusMe();
+        this.endDatePickerRef.current.focusIn();
       });
     } else {
-      this.endDatePickerRef.current.focusMe();
+      this.endDatePickerRef.current.focusIn();
     }
   };
 
   onEndDateChange = value => {
-    this.setState({endDate: value})
+    this.setState({endDate: value});
   };
 
   render() {
@@ -66,6 +66,7 @@ class IntervalPicker extends Component {
           minDate={moment(minDate, format)}
           maxDate={moment(maxDate, format)}
           format={format}
+          label={'Date from:'}
         />
         <DatePicker
           value={endDate}
@@ -76,6 +77,7 @@ class IntervalPicker extends Component {
           maxDate={moment(maxDate, format)}
           format={format}
           ref={this.endDatePickerRef}
+          label={'Date to:'}
         />
       </div>
     );

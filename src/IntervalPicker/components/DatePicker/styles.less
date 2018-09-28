@@ -1,14 +1,43 @@
 .date-picker {
-    display: inline-block;
+  display: inline-block;
+  outline: 0;
+  margin-right: 3px;
+
+  .selected-date-container {
+    display: flex;
+    flex-direction: column;
+    outline: 0;
+
+    > label {
+      margin-bottom: 0;
+    }
+
+    .selected-date {
+      height: 33px;
+    }
+  }
+
+  &:focus-within {
+    outline: 3px solid rgba(29, 144, 255, 0.75);
+    background-color: rgba(29, 144, 255, 0.75);
+
+    .selected-date {
+      z-index: 1;
+    }
 
     .calendar {
-        position: absolute;
-        background-color: #fefef4;
-        width: 300px;
-
-        .heading {
-            display: flex;
-            width: 100%;
-        }
+      outline: 3px solid rgba(29, 144, 255, 0.75);
     }
+  }
+
+  .calendar {
+    position: absolute;
+    background-color: #fefef4;
+    width: 300px;
+
+    .heading {
+      display: flex;
+      width: 100%;
+    }
+  }
 }

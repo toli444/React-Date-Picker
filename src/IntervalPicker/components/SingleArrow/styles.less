@@ -1,6 +1,14 @@
-.double-arrow {
-    border-top: 2px solid #2A2A2A;
-    border-bottom: 2px solid #2A2A2A;
-    cursor: pointer;
-    padding: 3px;
+@hover-color: #dadada;
+
+.single-arrow {
+  cursor: pointer;
+  padding: 3px;
+
+  &:hover {
+    background-color: #dadada;
+
+    &:active {
+      background-color: darken(@hover-color, 15%);
+    }
+  }
 }

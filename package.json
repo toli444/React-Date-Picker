@@ -8,8 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "build": "webpack"
+    "start": "node server.js",
+    "heroku-postbuild": "webpack -p",
+    "build": "webpack",
   },
   "keywords": [],
   "author": "",

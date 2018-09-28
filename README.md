@@ -33,4 +33,4 @@ npm test
 
 ## Author
 
-* **Anatoly Semenyaka** - [toli444](https://github.com/toli444)
+**Anatoly Semenyaka** - [toli444](https://github.com/toli444)

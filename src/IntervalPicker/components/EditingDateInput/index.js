@@ -9,8 +9,8 @@ const EditingDateInput = ({currentDate, editingUnit, format}) => {
   const year = moment(currentDate, format).format('YYYY');
 
   return <div className={styles['editing-date-input']}>
-    <span className={editingUnit === 'month' ? styles.selected : ''}>{month}</span>
-    <span className={editingUnit === 'year' ? styles.selected : ''}>{year}</span>
+    <span className={`${editingUnit === 'month' ? styles.selected : ''} month`}>{month}</span>
+    <span className={`${editingUnit === 'year' ? styles.selected : ''} year`}>{year}</span>
   </div>;
 };
 

@@ -8,20 +8,20 @@ import DatePicker from './components/DatePicker';
 
 class IntervalPicker extends Component {
   static propTypes = {
-    startDate: PropTypes.string,
-    endDate: PropTypes.string,
+    startDate: PropTypes.object,
+    endDate: PropTypes.object,
     onStartDateChange: PropTypes.func,
     onEndDateChange: PropTypes.func,
-    minDate: PropTypes.string,
-    maxDate: PropTypes.string,
+    minDate: PropTypes.object,
+    maxDate: PropTypes.object,
     format: PropTypes.string,
   };
 
   static defaultProps = {
-    startDate: '11-11-2011',
-    endDate: '15-11-2011',
-    maxDate: '11-11-2014',
-    minDate: '11-11-2008',
+    startDate: moment(),
+    endDate: moment().add(3, 'month'),
+    maxDate: moment().add(3, 'years'),
+    minDate: moment().subtract(3, 'years'),
     format: 'DD-MM-YYYY',
   };
 
@@ -36,8 +36,14 @@ class IntervalPicker extends Component {
     this.endDatePickerRef = React.createRef();
   }
 
-  onStartDateChange = value => {
+  componentDidMount() {
+    this.props.onStartDateChange(this.props.startDate);
+    this.props.onEndDateChange(this.props.endDate);
+  }
+
+  handleStartDateChange = value => {
     this.setState({startDate: value});
+    this.props.onStartDateChange(value);
 
     if (value.isSameOrAfter(this.state.endDate)) {
       this.setState({endDate: null}, () => {
@@ -48,8 +54,9 @@ class IntervalPicker extends Component {
     }
   };
 
-  onEndDateChange = value => {
+  handleEndDateChange = value => {
     this.setState({endDate: value});
+    this.props.onEndDateChange(value);
   };
 
   render() {
@@ -62,9 +69,9 @@ class IntervalPicker extends Component {
           value={startDate}
           startDate={startDate}
           endDate={endDate}
-          onDateChange={value => this.onStartDateChange(value)}
-          minDate={moment(minDate, format)}
-          maxDate={moment(maxDate, format)}
+          onDateChange={value => this.handleStartDateChange(value)}
+          minDate={minDate}
+          maxDate={maxDate}
           format={format}
           label={'Date from:'}
         />
@@ -72,9 +79,9 @@ class IntervalPicker extends Component {
           value={endDate}
           startDate={startDate}
           endDate={endDate}
-          onDateChange={value => this.onEndDateChange(value)}
-          minDate={moment(startDate)}
-          maxDate={moment(maxDate, format)}
+          onDateChange={value => this.handleEndDateChange(value)}
+          minDate={startDate}
+          maxDate={maxDate}
           format={format}
           ref={this.endDatePickerRef}
           label={'Date to:'}

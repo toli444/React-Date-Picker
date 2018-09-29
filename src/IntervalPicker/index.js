@@ -76,6 +76,7 @@ class IntervalPicker extends Component {
           label={'Date from:'}
         />
         <DatePicker
+          className="right"
           value={endDate}
           startDate={startDate}
           endDate={endDate}

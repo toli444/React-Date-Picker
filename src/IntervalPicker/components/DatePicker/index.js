@@ -11,6 +11,7 @@ import DaysChooser from '../choosers/DaysChooser';
 
 class DatePicker extends Component {
   static propTypes = {
+    className: PropTypes.string,
     value: PropTypes.object,
     startDate: PropTypes.object,
     endDate: PropTypes.object,
@@ -19,6 +20,10 @@ class DatePicker extends Component {
     format: PropTypes.string,
     onDateChange: PropTypes.func,
     label: PropTypes.string,
+  };
+
+  static defaultProps = {
+    className: ''
   };
 
   blurTimeout = null;
@@ -86,12 +91,12 @@ class DatePicker extends Component {
   };
 
   render() {
-    const {format, value, startDate, endDate, minDate, maxDate, label} = this.props;
+    const {format, value, startDate, endDate, minDate, maxDate, label, className} = this.props;
     const {currentDate, isFocusIn, editingUnit} = this.state;
 
     return (
       <div
-        className={styles['date-picker']}
+        className={`${styles['date-picker']} ${className}`}
         onFocus={this.onFocusHandler}
         onBlur={this.onBlurHandler}
         tabIndex="0"

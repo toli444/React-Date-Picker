@@ -2,6 +2,7 @@
   display: inline-block;
   outline: 0;
   margin-right: 3px;
+  position: relative;
 
   .selected-date-container {
     display: flex;
@@ -18,11 +19,13 @@
   }
 
   &:focus-within {
-    outline: 3px solid rgba(29, 144, 255, 0.75);
-    background-color: rgba(29, 144, 255, 0.75);
+    .selected-date-container {
+      outline: 3px solid rgba(29, 144, 255, 0.75);
+      background-color: rgba(29, 144, 255, 0.75);
+    }
 
     .selected-date {
-      z-index: 1;
+      z-index: 2;
     }
 
     .calendar {
@@ -30,10 +33,17 @@
     }
   }
 
+  &:global(.right) {
+    .calendar {
+      right: 0;
+    }
+  }
+
   .calendar {
     position: absolute;
     background-color: #fefef4;
     width: 300px;
+    z-index: 1;
 
     .heading {
       display: flex;

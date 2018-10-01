@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditingDateInput renders correctly 1`] = `
+<div
+  className="editing-date-input"
+/>
+`;
+
+exports[`EditingDateInput renders correctly with currentDate 1`] = `
+<div
+  className="editing-date-input"
+>
+  <span
+    className=" month"
+  >
+    today
+  </span>
+  <span
+    className=" year"
+  >
+    today
+  </span>
+</div>
+`;

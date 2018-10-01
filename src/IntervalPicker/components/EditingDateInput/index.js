@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import styles from './styles.less';
 
 const EditingDateInput = ({currentDate, editingUnit, format}) => {
-  const month = moment(currentDate, format).format('MMM');
-  const year = moment(currentDate, format).format('YYYY');
+  const month = currentDate && moment(currentDate, format).format('MMM');
+  const year = currentDate && moment(currentDate, format).format('YYYY');
 
   return <div className={styles['editing-date-input']}>
-    <span className={`${editingUnit === 'month' ? styles.selected : ''} month`}>{month}</span>
-    <span className={`${editingUnit === 'year' ? styles.selected : ''} year`}>{year}</span>
+    {month && <span className={`${editingUnit === 'month' ? styles.selected : ''} month`}>{month}</span>}
+    {year && <span className={`${editingUnit === 'year' ? styles.selected : ''} year`}>{year}</span>}
   </div>;
 };
 

@@ -79,9 +79,7 @@ class DaysChooser extends Component {
   }
 
   getDisabledDayClass(day) {
-    const {minDate, maxDate} = this.props;
-
-    return (day.value.isBefore(minDate) || day.value.isAfter(maxDate)) && styles.disabled;
+    return this.isDayDisabled(day.value) && styles.disabled;
   }
 
   getDayClasses(day) {
@@ -94,6 +92,18 @@ class DaysChooser extends Component {
       this.getBorderDaysClass(day),
     ].filter(Boolean).join(' ');
   }
+
+  isDayDisabled(dayValue) {
+    const {minDate, maxDate} = this.props;
+
+    return dayValue.isBefore(minDate) || dayValue.isAfter(maxDate);
+  }
+
+  handleDayClick = dayValue => {
+    if (!this.isDayDisabled(dayValue)) {
+      this.props.onDateChange(dayValue);
+    }
+  };
 
   render() {
     const {currentDate, onDateChange, format} = this.props;
@@ -110,7 +120,7 @@ class DaysChooser extends Component {
                   <span
                     className={this.getDayClasses(day)}
                     key={day.formattedValue}
-                    onClick={() => onDateChange(day.value)}
+                    onClick={() => this.handleDayClick(day.value)}
                   >
                   {day.formattedValue}
                   </span>

@@ -7,7 +7,7 @@ import styles from './styles.less';
 
 class DaysChooser extends Component {
   static propTypes = {
-    currentDate: PropTypes.object,
+    currentDate: PropTypes.object.isRequired,
     startDate: PropTypes.object,
     endDate: PropTypes.object,
     onDateChange: PropTypes.func,
@@ -17,6 +17,7 @@ class DaysChooser extends Component {
   };
 
   getDaysToShow(currentDate) {
+    window.moment = moment;
     const startOfMonth = moment(currentDate).startOf('month');
     const endOfMonth = moment(currentDate).endOf('month');
     const startOfWeekMonth = moment(startOfMonth).startOf('week');

@@ -13,12 +13,12 @@ exports[`EditingDateInput renders correctly with currentDate 1`] = `
   <span
     className=" month"
   >
-    today
+    Jul
   </span>
   <span
     className=" year"
   >
-    today
+    1997
   </span>
 </div>
 `;

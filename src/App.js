@@ -12,8 +12,6 @@ class App extends Component {
   format = 'DD/MM/YYYY';
 
   handleStartDateChange = value => {
-    debugger;
-
     this.setState({startDate: value.format(this.format)});
   };
 

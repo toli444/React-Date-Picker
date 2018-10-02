@@ -1,0 +1,1109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DaysChooser renders correctly with custom min and max date 1`] = `
+<div
+  className="days-chooser"
+>
+  <div
+    className="week"
+    key="0"
+  >
+    <span
+      className="day another-month disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day another-month disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+    <span
+      className="day disabled"
+      key="3"
+      onClick={[Function]}
+    >
+      3
+    </span>
+    <span
+      className="day disabled"
+      key="4"
+      onClick={[Function]}
+    >
+      4
+    </span>
+    <span
+      className="day disabled"
+      key="5"
+      onClick={[Function]}
+    >
+      5
+    </span>
+  </div>
+  <div
+    className="week"
+    key="1"
+  >
+    <span
+      className="day disabled"
+      key="6"
+      onClick={[Function]}
+    >
+      6
+    </span>
+    <span
+      className="day disabled"
+      key="7"
+      onClick={[Function]}
+    >
+      7
+    </span>
+    <span
+      className="day disabled"
+      key="8"
+      onClick={[Function]}
+    >
+      8
+    </span>
+    <span
+      className="day disabled"
+      key="9"
+      onClick={[Function]}
+    >
+      9
+    </span>
+    <span
+      className="day"
+      key="10"
+      onClick={[Function]}
+    >
+      10
+    </span>
+    <span
+      className="day"
+      key="11"
+      onClick={[Function]}
+    >
+      11
+    </span>
+    <span
+      className="day"
+      key="12"
+      onClick={[Function]}
+    >
+      12
+    </span>
+  </div>
+  <div
+    className="week"
+    key="2"
+  >
+    <span
+      className="day"
+      key="13"
+      onClick={[Function]}
+    >
+      13
+    </span>
+    <span
+      className="day"
+      key="14"
+      onClick={[Function]}
+    >
+      14
+    </span>
+    <span
+      className="day"
+      key="15"
+      onClick={[Function]}
+    >
+      15
+    </span>
+    <span
+      className="day"
+      key="16"
+      onClick={[Function]}
+    >
+      16
+    </span>
+    <span
+      className="day"
+      key="17"
+      onClick={[Function]}
+    >
+      17
+    </span>
+    <span
+      className="day"
+      key="18"
+      onClick={[Function]}
+    >
+      18
+    </span>
+    <span
+      className="day"
+      key="19"
+      onClick={[Function]}
+    >
+      19
+    </span>
+  </div>
+  <div
+    className="week"
+    key="3"
+  >
+    <span
+      className="day current"
+      key="20"
+      onClick={[Function]}
+    >
+      20
+    </span>
+    <span
+      className="day"
+      key="21"
+      onClick={[Function]}
+    >
+      21
+    </span>
+    <span
+      className="day"
+      key="22"
+      onClick={[Function]}
+    >
+      22
+    </span>
+    <span
+      className="day"
+      key="23"
+      onClick={[Function]}
+    >
+      23
+    </span>
+    <span
+      className="day"
+      key="24"
+      onClick={[Function]}
+    >
+      24
+    </span>
+    <span
+      className="day"
+      key="25"
+      onClick={[Function]}
+    >
+      25
+    </span>
+    <span
+      className="day"
+      key="26"
+      onClick={[Function]}
+    >
+      26
+    </span>
+  </div>
+  <div
+    className="week"
+    key="4"
+  >
+    <span
+      className="day"
+      key="27"
+      onClick={[Function]}
+    >
+      27
+    </span>
+    <span
+      className="day selected left-border right-border"
+      key="28"
+      onClick={[Function]}
+    >
+      28
+    </span>
+    <span
+      className="day"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="31"
+      onClick={[Function]}
+    >
+      31
+    </span>
+    <span
+      className="day another-month disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day another-month disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+  </div>
+</div>
+`;
+
+exports[`DaysChooser renders correctly with custom min and max date, start date and end date 1`] = `
+<div
+  className="days-chooser"
+>
+  <div
+    className="week"
+    key="0"
+  >
+    <span
+      className="day another-month disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day another-month disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+    <span
+      className="day disabled"
+      key="3"
+      onClick={[Function]}
+    >
+      3
+    </span>
+    <span
+      className="day disabled"
+      key="4"
+      onClick={[Function]}
+    >
+      4
+    </span>
+    <span
+      className="day disabled"
+      key="5"
+      onClick={[Function]}
+    >
+      5
+    </span>
+  </div>
+  <div
+    className="week"
+    key="1"
+  >
+    <span
+      className="day disabled"
+      key="6"
+      onClick={[Function]}
+    >
+      6
+    </span>
+    <span
+      className="day disabled"
+      key="7"
+      onClick={[Function]}
+    >
+      7
+    </span>
+    <span
+      className="day disabled"
+      key="8"
+      onClick={[Function]}
+    >
+      8
+    </span>
+    <span
+      className="day disabled"
+      key="9"
+      onClick={[Function]}
+    >
+      9
+    </span>
+    <span
+      className="day"
+      key="10"
+      onClick={[Function]}
+    >
+      10
+    </span>
+    <span
+      className="day"
+      key="11"
+      onClick={[Function]}
+    >
+      11
+    </span>
+    <span
+      className="day"
+      key="12"
+      onClick={[Function]}
+    >
+      12
+    </span>
+  </div>
+  <div
+    className="week"
+    key="2"
+  >
+    <span
+      className="day"
+      key="13"
+      onClick={[Function]}
+    >
+      13
+    </span>
+    <span
+      className="day"
+      key="14"
+      onClick={[Function]}
+    >
+      14
+    </span>
+    <span
+      className="day selected left-border"
+      key="15"
+      onClick={[Function]}
+    >
+      15
+    </span>
+    <span
+      className="day selected"
+      key="16"
+      onClick={[Function]}
+    >
+      16
+    </span>
+    <span
+      className="day selected"
+      key="17"
+      onClick={[Function]}
+    >
+      17
+    </span>
+    <span
+      className="day selected"
+      key="18"
+      onClick={[Function]}
+    >
+      18
+    </span>
+    <span
+      className="day selected"
+      key="19"
+      onClick={[Function]}
+    >
+      19
+    </span>
+  </div>
+  <div
+    className="week"
+    key="3"
+  >
+    <span
+      className="day current selected"
+      key="20"
+      onClick={[Function]}
+    >
+      20
+    </span>
+    <span
+      className="day selected"
+      key="21"
+      onClick={[Function]}
+    >
+      21
+    </span>
+    <span
+      className="day selected"
+      key="22"
+      onClick={[Function]}
+    >
+      22
+    </span>
+    <span
+      className="day selected"
+      key="23"
+      onClick={[Function]}
+    >
+      23
+    </span>
+    <span
+      className="day selected"
+      key="24"
+      onClick={[Function]}
+    >
+      24
+    </span>
+    <span
+      className="day selected right-border"
+      key="25"
+      onClick={[Function]}
+    >
+      25
+    </span>
+    <span
+      className="day"
+      key="26"
+      onClick={[Function]}
+    >
+      26
+    </span>
+  </div>
+  <div
+    className="week"
+    key="4"
+  >
+    <span
+      className="day"
+      key="27"
+      onClick={[Function]}
+    >
+      27
+    </span>
+    <span
+      className="day"
+      key="28"
+      onClick={[Function]}
+    >
+      28
+    </span>
+    <span
+      className="day"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="31"
+      onClick={[Function]}
+    >
+      31
+    </span>
+    <span
+      className="day another-month disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day another-month disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+  </div>
+</div>
+`;
+
+exports[`DaysChooser renders correctly with only required props 1`] = `
+<div
+  className="days-chooser"
+>
+  <div
+    className="week"
+    key="0"
+  >
+    <span
+      className="day another-month disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day another-month disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+    <span
+      className="day disabled"
+      key="3"
+      onClick={[Function]}
+    >
+      3
+    </span>
+    <span
+      className="day disabled"
+      key="4"
+      onClick={[Function]}
+    >
+      4
+    </span>
+    <span
+      className="day disabled"
+      key="5"
+      onClick={[Function]}
+    >
+      5
+    </span>
+  </div>
+  <div
+    className="week"
+    key="1"
+  >
+    <span
+      className="day disabled"
+      key="6"
+      onClick={[Function]}
+    >
+      6
+    </span>
+    <span
+      className="day disabled"
+      key="7"
+      onClick={[Function]}
+    >
+      7
+    </span>
+    <span
+      className="day disabled"
+      key="8"
+      onClick={[Function]}
+    >
+      8
+    </span>
+    <span
+      className="day disabled"
+      key="9"
+      onClick={[Function]}
+    >
+      9
+    </span>
+    <span
+      className="day disabled"
+      key="10"
+      onClick={[Function]}
+    >
+      10
+    </span>
+    <span
+      className="day disabled"
+      key="11"
+      onClick={[Function]}
+    >
+      11
+    </span>
+    <span
+      className="day disabled"
+      key="12"
+      onClick={[Function]}
+    >
+      12
+    </span>
+  </div>
+  <div
+    className="week"
+    key="2"
+  >
+    <span
+      className="day disabled"
+      key="13"
+      onClick={[Function]}
+    >
+      13
+    </span>
+    <span
+      className="day disabled"
+      key="14"
+      onClick={[Function]}
+    >
+      14
+    </span>
+    <span
+      className="day disabled"
+      key="15"
+      onClick={[Function]}
+    >
+      15
+    </span>
+    <span
+      className="day disabled"
+      key="16"
+      onClick={[Function]}
+    >
+      16
+    </span>
+    <span
+      className="day disabled"
+      key="17"
+      onClick={[Function]}
+    >
+      17
+    </span>
+    <span
+      className="day disabled"
+      key="18"
+      onClick={[Function]}
+    >
+      18
+    </span>
+    <span
+      className="day disabled"
+      key="19"
+      onClick={[Function]}
+    >
+      19
+    </span>
+  </div>
+  <div
+    className="week"
+    key="3"
+  >
+    <span
+      className="day current disabled"
+      key="20"
+      onClick={[Function]}
+    >
+      20
+    </span>
+    <span
+      className="day disabled"
+      key="21"
+      onClick={[Function]}
+    >
+      21
+    </span>
+    <span
+      className="day disabled"
+      key="22"
+      onClick={[Function]}
+    >
+      22
+    </span>
+    <span
+      className="day disabled"
+      key="23"
+      onClick={[Function]}
+    >
+      23
+    </span>
+    <span
+      className="day disabled"
+      key="24"
+      onClick={[Function]}
+    >
+      24
+    </span>
+    <span
+      className="day disabled"
+      key="25"
+      onClick={[Function]}
+    >
+      25
+    </span>
+    <span
+      className="day disabled"
+      key="26"
+      onClick={[Function]}
+    >
+      26
+    </span>
+  </div>
+  <div
+    className="week"
+    key="4"
+  >
+    <span
+      className="day disabled"
+      key="27"
+      onClick={[Function]}
+    >
+      27
+    </span>
+    <span
+      className="day selected left-border right-border"
+      key="28"
+      onClick={[Function]}
+    >
+      28
+    </span>
+    <span
+      className="day disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="31"
+      onClick={[Function]}
+    >
+      31
+    </span>
+    <span
+      className="day another-month disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day another-month disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+  </div>
+</div>
+`;
+
+exports[`DaysChooser renders correctly with other format 1`] = `
+<div
+  className="days-chooser"
+>
+  <div
+    className="week"
+    key="0"
+  >
+    <span
+      className="day another-month disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day another-month disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+    <span
+      className="day disabled"
+      key="3"
+      onClick={[Function]}
+    >
+      3
+    </span>
+    <span
+      className="day disabled"
+      key="4"
+      onClick={[Function]}
+    >
+      4
+    </span>
+    <span
+      className="day disabled"
+      key="5"
+      onClick={[Function]}
+    >
+      5
+    </span>
+  </div>
+  <div
+    className="week"
+    key="1"
+  >
+    <span
+      className="day disabled"
+      key="6"
+      onClick={[Function]}
+    >
+      6
+    </span>
+    <span
+      className="day disabled"
+      key="7"
+      onClick={[Function]}
+    >
+      7
+    </span>
+    <span
+      className="day disabled"
+      key="8"
+      onClick={[Function]}
+    >
+      8
+    </span>
+    <span
+      className="day disabled"
+      key="9"
+      onClick={[Function]}
+    >
+      9
+    </span>
+    <span
+      className="day disabled"
+      key="10"
+      onClick={[Function]}
+    >
+      10
+    </span>
+    <span
+      className="day disabled"
+      key="11"
+      onClick={[Function]}
+    >
+      11
+    </span>
+    <span
+      className="day disabled"
+      key="12"
+      onClick={[Function]}
+    >
+      12
+    </span>
+  </div>
+  <div
+    className="week"
+    key="2"
+  >
+    <span
+      className="day disabled"
+      key="13"
+      onClick={[Function]}
+    >
+      13
+    </span>
+    <span
+      className="day disabled"
+      key="14"
+      onClick={[Function]}
+    >
+      14
+    </span>
+    <span
+      className="day disabled"
+      key="15"
+      onClick={[Function]}
+    >
+      15
+    </span>
+    <span
+      className="day disabled"
+      key="16"
+      onClick={[Function]}
+    >
+      16
+    </span>
+    <span
+      className="day disabled"
+      key="17"
+      onClick={[Function]}
+    >
+      17
+    </span>
+    <span
+      className="day disabled"
+      key="18"
+      onClick={[Function]}
+    >
+      18
+    </span>
+    <span
+      className="day disabled"
+      key="19"
+      onClick={[Function]}
+    >
+      19
+    </span>
+  </div>
+  <div
+    className="week"
+    key="3"
+  >
+    <span
+      className="day current disabled"
+      key="20"
+      onClick={[Function]}
+    >
+      20
+    </span>
+    <span
+      className="day disabled"
+      key="21"
+      onClick={[Function]}
+    >
+      21
+    </span>
+    <span
+      className="day disabled"
+      key="22"
+      onClick={[Function]}
+    >
+      22
+    </span>
+    <span
+      className="day disabled"
+      key="23"
+      onClick={[Function]}
+    >
+      23
+    </span>
+    <span
+      className="day disabled"
+      key="24"
+      onClick={[Function]}
+    >
+      24
+    </span>
+    <span
+      className="day disabled"
+      key="25"
+      onClick={[Function]}
+    >
+      25
+    </span>
+    <span
+      className="day disabled"
+      key="26"
+      onClick={[Function]}
+    >
+      26
+    </span>
+  </div>
+  <div
+    className="week"
+    key="4"
+  >
+    <span
+      className="day disabled"
+      key="27"
+      onClick={[Function]}
+    >
+      27
+    </span>
+    <span
+      className="day selected left-border right-border"
+      key="28"
+      onClick={[Function]}
+    >
+      28
+    </span>
+    <span
+      className="day disabled"
+      key="29"
+      onClick={[Function]}
+    >
+      29
+    </span>
+    <span
+      className="day disabled"
+      key="30"
+      onClick={[Function]}
+    >
+      30
+    </span>
+    <span
+      className="day disabled"
+      key="31"
+      onClick={[Function]}
+    >
+      31
+    </span>
+    <span
+      className="day another-month disabled"
+      key="1"
+      onClick={[Function]}
+    >
+      1
+    </span>
+    <span
+      className="day another-month disabled"
+      key="2"
+      onClick={[Function]}
+    >
+      2
+    </span>
+  </div>
+</div>
+`;

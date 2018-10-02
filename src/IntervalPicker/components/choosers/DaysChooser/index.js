@@ -17,14 +17,9 @@ class DaysChooser extends Component {
   };
 
   getDaysToShow(currentDate) {
-    window.moment = moment;
-    const startOfMonth = moment(currentDate).startOf('month');
-    const endOfMonth = moment(currentDate).endOf('month');
-    const startOfWeekMonth = moment(startOfMonth).startOf('week');
-    const endOfWeekMonth = moment(endOfMonth).endOf('week');
-
     const daysToShow = [];
-    const currentDay = moment(startOfWeekMonth);
+    const endOfWeekMonth = this.getEndOfWeekMonth(currentDate);
+    const currentDay = this.getStartOfWeekMonth(currentDate);
 
     while (currentDay <= endOfWeekMonth) {
       daysToShow.push(moment(currentDay));
@@ -32,6 +27,18 @@ class DaysChooser extends Component {
     }
 
     return daysToShow;
+  }
+
+  getStartOfWeekMonth(currentDate) {
+    const startOfMonth = moment(currentDate).startOf('month');
+
+    return moment(startOfMonth).startOf('week');
+  }
+
+  getEndOfWeekMonth(currentDate) {
+    const endOfMonth = moment(currentDate).endOf('month');
+
+    return moment(endOfMonth).endOf('week');
   }
 
   getCombinedDaysByWeeks(days, currentDate) {
@@ -106,7 +113,7 @@ class DaysChooser extends Component {
   };
 
   render() {
-    const {currentDate, onDateChange, format} = this.props;
+    const {currentDate, format} = this.props;
     const daysToShow = this.getDaysToShow(moment(currentDate, format));
     const combinedDaysByWeeks = this.getCombinedDaysByWeeks(daysToShow, currentDate);
 

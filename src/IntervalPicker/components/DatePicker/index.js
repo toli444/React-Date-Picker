@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.less';
 
-import SingleArrow from '../SingleArrow';
-import DoubleArrow from '../DoubleArrow';
 import EditingDateInput from '../EditingDateInput';
+import Arrow from '../Arrow';
 import DaysChooser from '../choosers/DaysChooser';
 
 class DatePicker extends Component {
@@ -107,11 +106,11 @@ class DatePicker extends Component {
         </div>
         {isFocusIn && <div className={styles.calendar}>
           <div className={styles.heading}>
-            <DoubleArrow left onClick={() => this.subDate(1, 'year')}/>
-            <SingleArrow left onClick={() => this.subDate(1, 'month')}/>
+            <Arrow left double onClick={() => this.subDate(1, 'year')}/>
+            <Arrow left onClick={() => this.subDate(1, 'month')}/>
             <EditingDateInput currentDate={currentDate} editingUnit={editingUnit} format={format}/>
-            <SingleArrow onClick={() => this.addDate(1, 'month')}/>
-            <DoubleArrow onClick={() => this.addDate(1, 'year')}/>
+            <Arrow onClick={() => this.addDate(1, 'month')}/>
+            <Arrow double onClick={() => this.addDate(1, 'year')}/>
           </div>
           {<DaysChooser
             currentDate={currentDate}

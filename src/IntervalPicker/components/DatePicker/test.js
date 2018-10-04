@@ -7,6 +7,15 @@ import moment from "moment";
 const format = 'DD/MM/YYYY';
 
 describe('DatePicker', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    jest.useRealTimers();
+  });
+
   it('renders correctly', () => {
     const wrapper  = shallow(<DatePicker />);
 
@@ -81,32 +90,56 @@ describe('DatePicker', () => {
   });
 
   it('onBlurHandler', () => {
-    jest.useFakeTimers();
     const wrapper  = mount(<DatePicker />);
     const instance = wrapper.instance();
 
     expect(instance.blurTimeout).toEqual(null);
     expect(instance.state.isFocusIn).toEqual(null);
-    wrapper.instance().onBlurHandler();
+    instance.onBlurHandler();
     jest.runAllTimers();
-    expect(instance.blurTimeout).toEqual(1);
+    expect(instance.blurTimeout).not.toBe(false);
     expect(instance.state.isFocusIn).toEqual(false);
+    jest.clearAllTimers()
   });
 
   it('onFocusHandler', () => {
-    jest.useFakeTimers();
     const wrapper  = mount(<DatePicker />);
     const instance = wrapper.instance();
 
     instance.getCurrentDate = jest.fn().mockReturnValue(moment('28/08/2008', format));
     instance.blurTimeout = setTimeout(() => {});
 
-    expect(instance.blurTimeout).toEqual(1);
+    expect(instance.blurTimeout).not.toBe(false);
     expect(instance.state.isFocusIn).toEqual(null);
     expect(instance.state.currentDate).toEqual(null);
-    wrapper.instance().onFocusHandler();
-    expect(clearTimeout).toHaveBeenCalledWith(1);
+    instance.onFocusHandler();
+    expect(clearTimeout).toHaveBeenCalledWith(instance.blurTimeout);
     expect(instance.state.isFocusIn).toEqual(true);
     expect(instance.state.currentDate).toEqual(moment('28/08/2008', format));
+    jest.clearAllTimers()
+  });
+
+  it('handleDateChange', () => {
+    const onDateChangeMock = jest.fn();
+    const wrapper  = mount(<DatePicker
+      onDateChange={onDateChangeMock}
+    />);
+    const instance = wrapper.instance();
+
+    expect(instance.state.isFocusIn).toEqual(null);
+    expect(instance.state.currentDate).toEqual(null);
+    instance.handleDateChange(moment('28/08/2008', format));
+    expect(onDateChangeMock).toHaveBeenCalledWith(moment('28/08/2008', format));
+    expect(instance.state.isFocusIn).toEqual(false);
+    expect(instance.state.currentDate).toEqual(moment('28/08/2008', format));
+
+    jest.clearAllMocks();
+
+    expect(instance.state.isFocusIn).toEqual(false);
+    expect(instance.state.currentDate).toEqual(moment('28/08/2008', format));
+    instance.handleDateChange(null);
+    expect(onDateChangeMock).toHaveBeenCalledWith(null);
+    expect(instance.state.isFocusIn).toEqual(false);
+    expect(instance.state.currentDate).toEqual(null);
   });
 });

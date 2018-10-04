@@ -34,7 +34,7 @@ class DatePicker extends Component {
     this.containerRef = React.createRef();
     this.state = {
       currentDate: this.getCurrentDate(),
-      isFocusIn: false,
+      isFocusIn: null,
       editingUnit: null,
     };
   }
@@ -47,19 +47,17 @@ class DatePicker extends Component {
   }
 
   addDate(amount, unit) {
-    const {format} = this.props;
-    const {currentDate} = this.state;
-    const newDate = moment(currentDate, format).add(amount, unit);
-
-    this.setState({currentDate: newDate, editingUnit: unit})
+    this.setState({
+      currentDate: moment(this.state.currentDate, this.props.format).add(amount, unit),
+      editingUnit: unit
+    })
   }
 
   subDate(amount, unit) {
-    const {format} = this.props;
-    const {currentDate} = this.state;
-    const newDate = moment(currentDate, format).subtract(amount, unit);
-
-    this.setState({currentDate: newDate, editingUnit: unit})
+    this.setState({
+      currentDate: moment(this.state.currentDate, this.props.format).subtract(amount, unit),
+      editingUnit: unit
+    })
   }
 
   focusIn() {
@@ -67,11 +65,7 @@ class DatePicker extends Component {
   }
 
   onBlurHandler = () => {
-    this.blurTimeout = setTimeout(() => {
-      this.setState({
-        isFocusIn: false
-      });
-    });
+    this.blurTimeout = setTimeout(() => this.setState({ isFocusIn: false }));
   };
 
   onFocusHandler = () => {

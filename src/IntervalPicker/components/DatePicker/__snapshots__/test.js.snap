@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker renders correctly 1`] = `
+<div
+  className="date-picker "
+  onBlur={[Function]}
+  onFocus={[Function]}
+  tabIndex="0"
+>
+  <div
+    className="selected-date-container"
+  >
+    <label />
+    <input
+      className="selected-date"
+      readOnly={true}
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;
+
+exports[`DatePicker renders correctly with focusIn 1`] = `
+<div
+  className="date-picker "
+  onBlur={[Function]}
+  onFocus={[Function]}
+  tabIndex="0"
+>
+  <div
+    className="selected-date-container"
+  >
+    <label />
+    <input
+      className="selected-date"
+      readOnly={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="calendar"
+  >
+    <div
+      className="heading"
+    >
+      <DoubleArrow
+        left={true}
+        onClick={[Function]}
+      />
+      <SingleArrow
+        left={true}
+        onClick={[Function]}
+      />
+      <EditingDateInput
+        currentDate={null}
+        editingUnit={null}
+      />
+      <SingleArrow
+        onClick={[Function]}
+      />
+      <DoubleArrow
+        onClick={[Function]}
+      />
+    </div>
+    <DaysChooser
+      currentDate={null}
+      onDateChange={[Function]}
+    />
+  </div>
+</div>
+`;

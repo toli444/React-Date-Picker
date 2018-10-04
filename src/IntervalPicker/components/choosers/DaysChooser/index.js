@@ -56,21 +56,25 @@ class DaysChooser extends Component {
   }
 
   getAnotherMonthClass(day) {
-    return !day.isCurrentMonth && styles['another-month'];
+    return day.isCurrentMonth ? '' : styles['another-month'];
   }
 
   getCurrentDayClass(day) {
-    return this.props.currentDate.isSame(day.value, 'day') && styles.current;
+    return day.value && this.props.currentDate.isSame(day.value, 'day') ? styles.current : '';
   }
 
   getBetweenDaysClass(day) {
     const {startDate, endDate} = this.props;
 
-    return (day.value.isSameOrBefore(endDate, 'day') && day.value.isSameOrAfter(startDate, 'day')) && styles.selected;
+    return (day.value && day.value.isSameOrBefore(endDate, 'day') && day.value.isSameOrAfter(startDate, 'day')) ? styles.selected : '';
   }
 
   getBorderDaysClass(day) {
     const {startDate, endDate} = this.props;
+
+    if (!day.value) {
+      return ''
+    }
 
     if (day.value.isSame(startDate, 'day')) {
       if (day.value.isSame(endDate, 'day')) {
@@ -83,10 +87,12 @@ class DaysChooser extends Component {
     if (day.value.isSame(endDate, 'day')) {
       return styles['right-border'];
     }
+
+    return '';
   }
 
   getDisabledDayClass(day) {
-    return this.isDayDisabled(day.value) && styles.disabled;
+    return this.isDayDisabled(day.value) ? styles.disabled : '';
   }
 
   getDayClasses(day) {

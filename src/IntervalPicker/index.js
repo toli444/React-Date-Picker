@@ -23,6 +23,8 @@ class IntervalPicker extends Component {
     maxDate: moment().add(3, 'years'),
     minDate: moment().subtract(3, 'years'),
     format: 'DD-MM-YYYY',
+    onStartDateChange: () => {},
+    onEndDateChange: () => {},
   };
 
   constructor(props) {

@@ -163,17 +163,80 @@ describe('DaysChooser', () => {
     expect(instance.getEndOfWeekMonth().format()).toEqual("1997-08-02T23:59:59+03:00");
   });
 
-  // it('getCombinedDaysByWeeks', () => {
-  //   const wrapper = shallow(<DaysChooser currentDate={currentDate} />);
-  //   const instance = wrapper.instance();
-  //   jest.mock('moment', () => ({
-  //     createLocal: () => 'ttt',
-  //     format: () => '1',
-  //     isSame: () => true,
-  //   }));
-  //
-  //   expect(instance.getCombinedDaysByWeeks([1, 2, 3], moment())).toEqual();
-  // })
+  it('getCombinedDaysByWeeks', () => {
+    const wrapper = shallow(<DaysChooser currentDate={moment('20/07/1997', format)} />);
+    const instance = wrapper.instance();
+
+    const getExpectedObject = (value, formattedValue, isCurrentMonth) => {
+      return {
+        value,
+        formattedValue,
+        isCurrentMonth,
+      }
+    };
+
+    expect(instance.getCombinedDaysByWeeks([
+      moment('28/06/1997', format),
+      moment('29/06/1997', format),
+      moment('30/06/1997', format),
+      moment('01/07/1997', format),
+      moment('02/07/1997', format),
+      moment('03/07/1997', format),
+      moment('04/07/1997', format),
+    ], moment('5/07/1997', format))).toEqual([
+      [
+        getExpectedObject(moment('28/06/1997', format), '28', false),
+        getExpectedObject(moment('29/06/1997', format), '29', false),
+        getExpectedObject(moment('30/06/1997', format), '30', false),
+        getExpectedObject(moment('01/07/1997', format), '1', true),
+        getExpectedObject(moment('02/07/1997', format), '2', true),
+        getExpectedObject(moment('03/07/1997', format), '3', true),
+        getExpectedObject(moment('04/07/1997', format), '4', true),
+      ]
+    ]);
+
+    expect(instance.getCombinedDaysByWeeks([
+      moment('30/06/1997', format),
+      moment('01/07/1997', format),
+      moment('02/07/1997', format),
+    ], moment('5/07/1997', format))).toEqual([
+      [
+        getExpectedObject(moment('30/06/1997', format), '30', false),
+        getExpectedObject(moment('01/07/1997', format), '1', true),
+        getExpectedObject(moment('02/07/1997', format), '2', true),
+      ]
+    ]);
+
+    expect(instance.getCombinedDaysByWeeks([
+      moment('28/06/1997', format),
+      moment('29/06/1997', format),
+      moment('30/06/1997', format),
+      moment('01/07/1997', format),
+      moment('02/07/1997', format),
+      moment('03/07/1997', format),
+      moment('04/07/1997', format),
+      moment('05/07/1997', format),
+      moment('06/07/1997', format),
+      moment('07/07/1997', format),
+    ], moment('5/07/1997', format))).toEqual([
+      [
+        getExpectedObject(moment('28/06/1997', format), '28', false),
+        getExpectedObject(moment('29/06/1997', format), '29', false),
+        getExpectedObject(moment('30/06/1997', format), '30', false),
+        getExpectedObject(moment('01/07/1997', format), '1', true),
+        getExpectedObject(moment('02/07/1997', format), '2', true),
+        getExpectedObject(moment('03/07/1997', format), '3', true),
+        getExpectedObject(moment('04/07/1997', format), '4', true),
+      ], [
+        getExpectedObject(moment('05/07/1997', format), '5', true),
+        getExpectedObject(moment('06/07/1997', format), '6', true),
+        getExpectedObject(moment('07/07/1997', format), '7', true),
+      ]
+    ]);
+
+    expect(instance.getCombinedDaysByWeeks([], moment('5/07/1997', format))).toEqual([]);
+    expect(instance.getCombinedDaysByWeeks(null, moment('5/07/1997', format))).toEqual([]);
+  });
 
   it('getAnotherMonthClass', () => {
     const wrapper = shallow(<DaysChooser currentDate={moment('20/07/1997', format)} />);
@@ -259,6 +322,14 @@ describe('DaysChooser', () => {
     instance.getBetweenDaysClass = jest.fn();
     instance.getBorderDaysClass = jest.fn();
 
+    const mockReturnValues = (first, second, third, fourth, fifth) => {
+      instance.getAnotherMonthClass.mockReturnValue(first);
+      instance.getCurrentDayClass.mockReturnValue(second);
+      instance.getDisabledDayClass.mockReturnValue(third);
+      instance.getBetweenDaysClass.mockReturnValue(fourth);
+      instance.getBorderDaysClass.mockReturnValue(fifth);
+    };
+
     const checkToBeCalledWith = value => {
       expect(instance.getAnotherMonthClass).toBeCalledWith(value);
       expect(instance.getCurrentDayClass).toBeCalledWith(value);
@@ -268,36 +339,19 @@ describe('DaysChooser', () => {
     };
 
     it('all true', () => {
-      instance.getAnotherMonthClass.mockReturnValue('1');
-      instance.getCurrentDayClass.mockReturnValue('2');
-      instance.getDisabledDayClass.mockReturnValue('3');
-      instance.getBetweenDaysClass.mockReturnValue('4');
-      instance.getBorderDaysClass.mockReturnValue('5');
-
+      mockReturnValues('1', '2', '3', '4', '5');
       expect(instance.getDayClasses('day')).toEqual('day 1 2 3 4 5');
-
       checkToBeCalledWith('day');
     });
 
     it('some true', () => {
-      instance.getAnotherMonthClass.mockReturnValue('1');
-      instance.getCurrentDayClass.mockReturnValue('');
-      instance.getDisabledDayClass.mockReturnValue('3');
-      instance.getBetweenDaysClass.mockReturnValue('');
-      instance.getBorderDaysClass.mockReturnValue('5');
-
+      mockReturnValues('1', '', '3', '', '5');
       expect(instance.getDayClasses('day')).toEqual('day 1 3 5');
-
       checkToBeCalledWith('day');
     });
 
     it('none true', () => {
-      instance.getAnotherMonthClass.mockReturnValue('');
-      instance.getCurrentDayClass.mockReturnValue('');
-      instance.getDisabledDayClass.mockReturnValue('');
-      instance.getBetweenDaysClass.mockReturnValue('');
-      instance.getBorderDaysClass.mockReturnValue('');
-
+      mockReturnValues('', '', '', '', '');
       expect(instance.getDayClasses('day')).toEqual('day');
       checkToBeCalledWith('day');
       expect(instance.getDayClasses(null)).toEqual('day');

@@ -126,20 +126,17 @@ describe('DatePicker', () => {
     />);
     const instance = wrapper.instance();
 
-    expect(instance.state.isFocusIn).toEqual(null);
-    expect(instance.state.currentDate).toEqual(null);
-    instance.handleDateChange(moment('28/08/2008', format));
-    expect(onDateChangeMock).toHaveBeenCalledWith(moment('28/08/2008', format));
-    expect(instance.state.isFocusIn).toEqual(false);
-    expect(instance.state.currentDate).toEqual(moment('28/08/2008', format));
+    const execTestCase = (isFocusIn, currentDate, newDate, expectedFocusIn, expectedCurrentDate = newDate) => {
+      expect(instance.state.isFocusIn).toEqual(isFocusIn);
+      expect(instance.state.currentDate).toEqual(currentDate);
+      instance.handleDateChange(newDate);
+      expect(onDateChangeMock).toHaveBeenCalledWith(expectedCurrentDate);
+      expect(instance.state.isFocusIn).toEqual(expectedFocusIn);
+      expect(instance.state.currentDate).toEqual(expectedCurrentDate);
+      jest.clearAllMocks();
+    };
 
-    jest.clearAllMocks();
-
-    expect(instance.state.isFocusIn).toEqual(false);
-    expect(instance.state.currentDate).toEqual(moment('28/08/2008', format));
-    instance.handleDateChange(null);
-    expect(onDateChangeMock).toHaveBeenCalledWith(null);
-    expect(instance.state.isFocusIn).toEqual(false);
-    expect(instance.state.currentDate).toEqual(null);
+    execTestCase(null, null, moment('28/08/2008', format), false);
+    execTestCase(false, moment('28/08/2008', format), null, false);
   });
 });

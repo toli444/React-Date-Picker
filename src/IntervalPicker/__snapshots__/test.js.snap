@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntervalPicker renders correctly 1`] = `
+<div
+  className="interval-picker"
+>
+  <DatePicker
+    className=""
+    endDate={"2017-11-25T12:34:56.000Z"}
+    format="DD-MM-YYYY"
+    label="Date from:"
+    maxDate={"2017-11-25T12:34:56.000Z"}
+    minDate={"2017-11-25T12:34:56.000Z"}
+    onDateChange={[Function]}
+    startDate={"2017-11-25T12:34:56.000Z"}
+    value={"2017-11-25T12:34:56.000Z"}
+  />
+  <DatePicker
+    className="right"
+    endDate={"2017-11-25T12:34:56.000Z"}
+    format="DD-MM-YYYY"
+    label="Date to:"
+    maxDate={"2017-11-25T12:34:56.000Z"}
+    minDate={"2017-11-25T12:34:56.000Z"}
+    onDateChange={[Function]}
+    startDate={"2017-11-25T12:34:56.000Z"}
+    value={"2017-11-25T12:34:56.000Z"}
+  />
+</div>
+`;

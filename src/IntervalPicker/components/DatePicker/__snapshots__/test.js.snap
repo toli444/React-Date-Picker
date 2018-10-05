@@ -45,11 +45,12 @@ exports[`DatePicker renders correctly with focusIn 1`] = `
     <div
       className="heading"
     >
-      <DoubleArrow
+      <Arrow
+        double={true}
         left={true}
         onClick={[Function]}
       />
-      <SingleArrow
+      <Arrow
         left={true}
         onClick={[Function]}
       />
@@ -57,10 +58,11 @@ exports[`DatePicker renders correctly with focusIn 1`] = `
         currentDate={null}
         editingUnit={null}
       />
-      <SingleArrow
+      <Arrow
         onClick={[Function]}
       />
-      <DoubleArrow
+      <Arrow
+        double={true}
         onClick={[Function]}
       />
     </div>

@@ -8,4 +8,17 @@ describe('SingleArrow', () => {
 
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('getArrow', () => {
+    const wrapper  = shallow(<Arrow />);
+    const instance = wrapper.instance();
+
+    expect(instance.getArrow()).toEqual('>');
+    wrapper.setProps({ left: true});
+    expect(instance.getArrow()).toEqual('<');
+    wrapper.setProps({ left: true, double: true});
+    expect(instance.getArrow()).toEqual('<<');
+    wrapper.setProps({ left: false, double: true});
+    expect(instance.getArrow()).toEqual('>>');
+  });
 });

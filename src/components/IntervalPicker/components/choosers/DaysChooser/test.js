@@ -1,5 +1,5 @@
 import React from 'react';
-import DaysChooser from '../DaysChooser';
+import DaysChooser from './index';
 import {shallow} from 'enzyme';
 import moment from 'moment';
 import MockDate from 'mockdate';

@@ -1,5 +1,5 @@
 import React from 'react';
-import EditingDateInput from '../EditingDateInput';
+import EditingDateInput from './index';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 

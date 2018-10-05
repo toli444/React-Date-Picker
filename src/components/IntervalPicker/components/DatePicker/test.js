@@ -1,5 +1,5 @@
 import React from 'react';
-import DatePicker from '../DatePicker';
+import DatePicker from './index';
 import { shallow, mount } from 'enzyme';
 
 import moment from "moment";

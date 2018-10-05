@@ -1,0 +1,28 @@
+@dark-grey: #cccccc;
+
+.main-page {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  .header {
+    padding: 15px 40px;
+
+    label {
+      margin-right: 5px;
+      margin-bottom: 0;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  }
+
+  .content {
+    display: flex;
+    justify-content: center;
+    background-color: @dark-grey;
+    flex-grow: 1;
+    padding-top: 30vh;
+  }
+}

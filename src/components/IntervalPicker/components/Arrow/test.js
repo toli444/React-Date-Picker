@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Arrow from '../Arrow';
+import Arrow from './index';
 
 describe('SingleArrow', () => {
   it('renders correctly', () => {

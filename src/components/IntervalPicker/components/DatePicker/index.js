@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 
 import styles from './styles.less';
 
-import EditingDateInput from '../EditingDateInput';
-import Arrow from '../Arrow';
-import DaysChooser from '../choosers/DaysChooser';
+import EditingDateInput from '../EditingDateInput/index';
+import Arrow from '../Arrow/index';
+import DaysChooser from '../choosers/DaysChooser/index';
 
 class DatePicker extends Component {
   static propTypes = {

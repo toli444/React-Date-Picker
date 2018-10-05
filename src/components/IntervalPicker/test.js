@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import IntervalPicker from '../IntervalPicker';
+import IntervalPicker from './index';
 import moment from "moment";
 
 const format = 'DD/MM/YYYY';

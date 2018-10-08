@@ -1,4 +1,4 @@
-import { VisibilityFilters } from '../actions'
+import { VisibilityFilters } from '../../actions'
 
 const initialState = [VisibilityFilters.PAST, VisibilityFilters.CURRENT, VisibilityFilters.FUTURE];
 

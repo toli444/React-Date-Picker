@@ -5,9 +5,8 @@ const vacations = (state = [], {type, payload}) => {
         ...state, {
           id: payload.id,
           name: payload.name,
-          startDate: payload.startDate,
-          endDate: payload.endDate,
-          completed: false
+          startDate: payload.startDate.clone(),
+          endDate: payload.endDate.clone(),
         }
       ];
     default:

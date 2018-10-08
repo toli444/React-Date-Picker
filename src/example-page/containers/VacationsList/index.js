@@ -15,14 +15,23 @@ const isCurrentVacation = vacation => (
 const isFutureVacation = vacation => today.isBefore(vacation.startDate, 'day');
 
 const filters = {
-  [VisibilityFilters.PAST]: isPastVacation,
-  [VisibilityFilters.CURRENT]: isCurrentVacation,
-  [VisibilityFilters.FUTURE]: isFutureVacation,
+  [VisibilityFilters.PAST]: {
+    name: 'past',
+    action: isPastVacation,
+  },
+  [VisibilityFilters.CURRENT]: {
+    name: 'current',
+    action: isCurrentVacation,
+  },
+  [VisibilityFilters.FUTURE]: {
+    name: 'future',
+    action: isFutureVacation,
+  },
 };
 
 const isVisibleVacation = (vacation, currentFilters) => {
   for (let filter of currentFilters) {
-    if (filters[filter](vacation)) {
+    if (filters[filter].action(vacation)) {
       return true;
     }
   }
@@ -40,13 +49,23 @@ const getVisibleVacations = (vacations, currentFilters) => {
   return vacations.filter(vacation => isVisibleVacation(vacation, currentFilters))
 };
 
+const capitalize = string => `${string[0].toUpperCase()}${string.slice(1)}`;
+
+const getVacationsLabel = currentFilters => {
+  if (!areFiltersApplied(currentFilters)) {
+    return 'All vacations:'
+  }
+
+  return `${capitalize(currentFilters.map(filter => filters[filter].name).join(' and '))} vacations:`;
+};
+
 const VacationsList = ({vacations = [], currentFilters, format}) => (
   <div className="vacation-list">
-    <h3>Vacations: </h3>
+    <h3>{getVacationsLabel(currentFilters)}</h3>
     <h6>(today is: {today.format(format)})</h6>
     {vacations.length > 0 ? (
       <ul>
-        {vacations.map(vacation =>
+        {(getVisibleVacations(vacations, currentFilters) || []).map(vacation =>
           <Vacation
             key={vacation.id}
             format={format}
@@ -55,7 +74,7 @@ const VacationsList = ({vacations = [], currentFilters, format}) => (
         )}
       </ul>
     ) : (
-      areFiltersApplied(currentFilters) ? '' : <h5><b>There are no any vacations yet</b></h5>
+      <h5><b>There are no any vacations yet</b></h5>
     )}
   </div>
 );
@@ -68,7 +87,7 @@ VacationsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  vacations: getVisibleVacations(state.vacations, state.visibilityFilters),
+  vacations: state.vacations,
   currentFilters: state.visibilityFilters,
 });
 

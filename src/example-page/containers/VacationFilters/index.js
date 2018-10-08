@@ -29,15 +29,21 @@ class VacationFilters extends Component {
   handleChange(e, index) {
     const newFilters = this.state.filters.concat();
     const filter = newFilters[index];
-    filter.checked = e.target.checked;
+    const isChecked = e.target.checked;
 
-    if (filter.checked) {
+    if (isChecked) {
       this.props.setVisibilityFilter(filter.value);
-    } else {
+      filter.checked = isChecked;
+    } else if ((this.getCheckedFilters() || []).length > 1) {
       this.props.unsetVisibilityFilter(filter.value);
+      filter.checked = isChecked;
     }
 
     this.setState({filters: newFilters})
+  }
+
+  getCheckedFilters() {
+    return this.state.filters.filter(filter => filter.checked);
   }
 
   render() {

@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {VisibilityFilters} from '../../actions';
+import { VisibilityFilters } from '../../actions';
 import Vacation from '../../components/Vacation';
 
 const today = moment();
@@ -30,26 +30,33 @@ const isVisibleVacation = (vacation, currentFilters) => {
   return false;
 };
 
+const areFiltersApplied = currentFilters => currentFilters.length !== Object.keys(VisibilityFilters).length;
+
 const getVisibleVacations = (vacations, currentFilters) => {
-  if (currentFilters.length === VisibilityFilters.length) {
+  if (!areFiltersApplied(currentFilters)) {
     return vacations;
   }
 
   return vacations.filter(vacation => isVisibleVacation(vacation, currentFilters))
 };
 
-const VacationsList = ({vacations, format}) => (
+const VacationsList = ({vacations = [], currentFilters, format}) => (
   <div className="vacation-list">
     <h3>Current vacations: </h3>
-    <ul>
-      {(vacations || []).map(vacation =>
-        <Vacation
-          key={vacation.id}
-          format={format}
-          {...vacation}
-        />
-      )}
-    </ul>
+    <h6>(today is: {today.format(format)})</h6>
+    {vacations.length > 0 ? (
+      <ul>
+        {vacations.map(vacation =>
+          <Vacation
+            key={vacation.id}
+            format={format}
+            {...vacation}
+          />
+        )}
+      </ul>
+    ) : (
+      areFiltersApplied(currentFilters) ? '' : <h5>There are no any vacations yet</h5>
+    )}
   </div>
 );
 
@@ -60,7 +67,8 @@ VacationsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  vacations: getVisibleVacations(state.vacations, state.visibilityFilters)
+  vacations: getVisibleVacations(state.vacations, state.visibilityFilters),
+  currentFilters: state.visibilityFilters,
 });
 
 export default connect(mapStateToProps)(VacationsList)

@@ -60,17 +60,25 @@ class DaysChooser extends Component {
   }
 
   getCurrentDayClass(day) {
-    return day.value && this.props.currentDate.isSame(day.value, 'day') ? styles.current : '';
+    return day.value && moment().date() === day.value.date() ? styles.current : '';
   }
 
   getBetweenDaysClass(day) {
     const {startDate, endDate} = this.props;
 
-    return (
-      day.value &&
-      day.value.isSameOrBefore(endDate, 'day') &&
-      day.value.isSameOrAfter(startDate, 'day')
-    ) ? styles.selected : '';
+    if (startDate && day.value) {
+      if (endDate) {
+        return (
+          day.value &&
+          day.value.isSameOrBefore(endDate, 'day') &&
+          day.value.isSameOrAfter(startDate, 'day')
+        ) ? styles.selected : '';
+      }
+
+      return day.value && this.props.startDate.isSame(day.value, 'day') ? styles.selected : '';
+    }
+
+    return '';
   }
 
   getBorderDaysClass(day) {

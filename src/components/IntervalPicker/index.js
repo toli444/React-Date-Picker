@@ -18,6 +18,8 @@ class IntervalPicker extends Component {
   };
 
   static defaultProps = {
+    startDate: moment(),
+    endDate: moment(),
     maxDate: moment().add(3, 'years'),
     minDate: moment().subtract(3, 'years'),
     format: 'DD-MM-YYYY',
@@ -28,20 +30,16 @@ class IntervalPicker extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      startDate: props.startDate || moment(),
-      endDate: props.endDate || moment(),
-    };
-
     this.endDatePickerRef = React.createRef();
   }
 
   handleStartDateChange = value => {
-    this.setState({startDate: value});
-    this.props.onStartDateChange(value);
+    const {endDate, onStartDateChange, onEndDateChange} = this.props;
+    onStartDateChange(value);
 
-    if (value.isSameOrAfter(this.state.endDate)) {
-      this.setState({endDate: null}, () => {
+    if (value.isSameOrAfter(endDate)) {
+      onEndDateChange(value);
+      setImmediate(() => {
         this.endDatePickerRef.current.focusIn();
       });
     } else {
@@ -49,20 +47,15 @@ class IntervalPicker extends Component {
     }
   };
 
-  handleEndDateChange = value => {
-    this.setState({endDate: value});
-    this.props.onEndDateChange(value);
-  };
-
   render() {
-    const {minDate, maxDate, format} = this.props;
+    const {minDate, maxDate, format, onEndDateChange, startDate, endDate} = this.props;
 
     return (
       <div className={styles['interval-picker']}>
         <DatePicker
-          value={this.props.startDate}
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
+          value={startDate}
+          startDate={startDate}
+          endDate={endDate}
           onDateChange={value => this.handleStartDateChange(value)}
           minDate={minDate}
           maxDate={maxDate}
@@ -71,11 +64,11 @@ class IntervalPicker extends Component {
         />
         <DatePicker
           className="right"
-          value={this.props.endDate}
-          startDate={this.state.startDate}
-          endDate={this.state.endDate}
-          onDateChange={value => this.handleEndDateChange(value)}
-          minDate={this.state.startDate}
+          value={endDate}
+          startDate={startDate}
+          endDate={endDate}
+          onDateChange={onEndDateChange}
+          minDate={startDate}
           maxDate={maxDate}
           format={format}
           ref={this.endDatePickerRef}

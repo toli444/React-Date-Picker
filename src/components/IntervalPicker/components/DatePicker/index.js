@@ -39,22 +39,21 @@ class DatePicker extends Component {
   }
 
   getCurrentDate() {
-    const {value, startDate, format} = this.props;
-    const actualValue = value || startDate;
+    const {value, startDate} = this.props;
 
-    return actualValue ? moment(actualValue, format) : null
+    return value || startDate || moment();
   }
 
   addDate(amount, unit) {
     this.setState({
-      currentDate: moment(this.state.currentDate, this.props.format).add(amount, unit),
+      currentDate: this.state.currentDate.clone().add(amount, unit),
       editingUnit: unit
     })
   }
 
   subDate(amount, unit) {
     this.setState({
-      currentDate: moment(this.state.currentDate, this.props.format).subtract(amount, unit),
+      currentDate: this.state.currentDate.clone().subtract(amount, unit),
       editingUnit: unit
     })
   }

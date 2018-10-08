@@ -39,12 +39,11 @@ class IntervalPicker extends Component {
 
     if (value.isSameOrAfter(endDate)) {
       onEndDateChange(value);
-      setImmediate(() => {
-        this.endDatePickerRef.current.focusIn();
-      });
-    } else {
-      this.endDatePickerRef.current.focusIn();
     }
+
+    setImmediate(() => {
+      this.endDatePickerRef.current.focusIn();
+    });
   };
 
   render() {

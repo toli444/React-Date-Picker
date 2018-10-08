@@ -12,7 +12,7 @@ class ExamplePage extends Component {
     return (
       <div className={styles['example-page']}>
         <VacationsList format={this.format} />
-        <div>
+        <div className={styles['right-pane']}>
           <VacationForm format={this.format} />
           <VacationFilters />
         </div>

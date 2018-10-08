@@ -5,5 +5,5 @@ import visibilityFilters from './visibilityFilters';
 
 export default combineReducers({
   vacations,
-  visibilityFilters: visibilityFilters
+  visibilityFilters,
 });

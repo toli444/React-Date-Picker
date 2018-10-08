@@ -1,22 +1,41 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import {VisibilityFilters} from '../../actions';
 import Vacation from '../../components/Vacation';
 
-const getVisibleVacations = (todos, filter) => {
-  switch (filter) {
-    case VisibilityFilters.SHOW_ALL:
-      return todos;
-    case VisibilityFilters.SHOW_PAST:
-      return todos.filter(t => t.completed);
-    case VisibilityFilters.SHOW_ACTIVE:
-      return todos.filter(t => !t.completed);
-    case VisibilityFilters.SHOW_FUTURE:
-      return todos.filter(t => !t.completed);
-    default:
-      throw new Error('Unknown filter: ' + filter)
+const today = moment();
+
+const isPastVacation = vacation => today.isAfter(vacation.endDate, 'day');
+const isCurrentVacation = vacation => (
+  today.isSameOrAfter(vacation.startDate, 'day') &&
+  today.isSameOrBefore(vacation.endDate, 'day')
+);
+const isFutureVacation = vacation => today.isBefore(vacation.startDate, 'day');
+
+const filters = {
+  [VisibilityFilters.PAST]: isPastVacation,
+  [VisibilityFilters.CURRENT]: isCurrentVacation,
+  [VisibilityFilters.FUTURE]: isFutureVacation,
+};
+
+const isVisibleVacation = (vacation, currentFilters) => {
+  for (let filter of currentFilters) {
+    if (filters[filter](vacation)) {
+      return true;
+    }
   }
+
+  return false;
+};
+
+const getVisibleVacations = (vacations, currentFilters) => {
+  if (currentFilters.length === VisibilityFilters.length) {
+    return vacations;
+  }
+
+  return vacations.filter(vacation => isVisibleVacation(vacation, currentFilters))
 };
 
 const VacationsList = ({vacations, format}) => (
@@ -41,7 +60,7 @@ VacationsList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  vacations: getVisibleVacations(state.vacations, state.visibilityFilter)
+  vacations: getVisibleVacations(state.vacations, state.visibilityFilters)
 });
 
 export default connect(mapStateToProps)(VacationsList)

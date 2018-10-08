@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux'
 import vacations from './vacations';
-import visibilityFilter from './visibilityFilter';
+import visibilityFilters from './visibilityFilters';
 
 
 export default combineReducers({
   vacations,
-  visibilityFilter
+  visibilityFilters: visibilityFilters
 });

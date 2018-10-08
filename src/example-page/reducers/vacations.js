@@ -10,12 +10,6 @@ const vacations = (state = [], {type, payload}) => {
           completed: false
         }
       ];
-    case 'TOGGLE_VACATION':
-      return state.map(vacation =>
-        (vacation.id === payload.id)
-          ? {...vacation, completed: !payload.completed}
-          : vacation
-      );
     default:
       return state;
   }

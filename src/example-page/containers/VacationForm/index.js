@@ -44,8 +44,14 @@ class VacationForm extends Component {
     e.preventDefault();
 
     this.props.dispatch(addVacation(this.state));
-    //this.resetForm();
+    this.resetForm();
   };
+
+  isSaveButtonDisabled() {
+    const {name, startDate, endDate} = this.state;
+
+    return !name.trim() || !startDate || !endDate;
+  }
 
   render() {
     const {name, startDate, endDate} = this.state;
@@ -70,7 +76,7 @@ class VacationForm extends Component {
               format={this.props.format}
             />
           </div>
-          <button type="submit" className={styles.submit}>
+          <button type="submit" className={styles.submit} disabled={this.isSaveButtonDisabled()}>
             Save vacation
           </button>
         </form>

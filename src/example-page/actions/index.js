@@ -10,9 +10,13 @@ export const setVisibilityFilter = filter => ({
   filter
 });
 
+export const unsetVisibilityFilter = filter => ({
+  type: 'UNSET_VISIBILITY_FILTER',
+  filter
+});
+
 export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_PAST: 'SHOW_PAST',
-  SHOW_ACTIVE: 'SHOW_ACTIVE',
-  SHOW_FUTURE: 'SHOW_FUTURE',
+  PAST: 'PAST',
+  CURRENT: 'CURRENT',
+  FUTURE: 'FUTURE',
 };

@@ -3,15 +3,18 @@ import DatePicker from './index';
 import { shallow, mount } from 'enzyme';
 
 import moment from "moment";
+import MockDate from "mockdate";
 
 const format = 'DD/MM/YYYY';
 
 describe('DatePicker', () => {
   beforeEach(() => {
     jest.useFakeTimers();
+    MockDate.set(moment('28/07/1997', format));
   });
 
   afterEach(() => {
+    MockDate.reset();
     jest.clearAllMocks();
     jest.useRealTimers();
   });
@@ -46,9 +49,9 @@ describe('DatePicker', () => {
     wrapper.setProps({ startDate, value: null});
     expect(instance.getCurrentDate()).toEqual(startDate);
     wrapper.setProps({ startDate: null, value: null});
-    expect(instance.getCurrentDate()).toEqual(null);
+    expect(instance.getCurrentDate()).toEqual(moment());
     wrapper.setProps({ startDate: undefined, value: undefined});
-    expect(instance.getCurrentDate()).toEqual(null);
+    expect(instance.getCurrentDate()).toEqual(moment());
   });
 
   it('addDate', () => {
@@ -111,7 +114,7 @@ describe('DatePicker', () => {
 
     expect(instance.blurTimeout).not.toBe(false);
     expect(instance.state.isFocusIn).toEqual(null);
-    expect(instance.state.currentDate).toEqual(null);
+    expect(instance.state.currentDate).toEqual(moment());
     instance.onFocusHandler();
     expect(clearTimeout).toHaveBeenCalledWith(instance.blurTimeout);
     expect(instance.state.isFocusIn).toEqual(true);
@@ -136,7 +139,7 @@ describe('DatePicker', () => {
       jest.clearAllMocks();
     };
 
-    execTestCase(null, null, moment('28/08/2008', format), false);
+    execTestCase(null, moment(), moment('28/08/2008', format), false);
     execTestCase(false, moment('28/08/2008', format), null, false);
   });
 });

@@ -55,7 +55,7 @@ exports[`DatePicker renders correctly with focusIn 1`] = `
         onClick={[Function]}
       />
       <EditingDateInput
-        currentDate={null}
+        currentDate={"1997-07-27T21:00:00.000Z"}
         editingUnit={null}
       />
       <Arrow
@@ -67,7 +67,7 @@ exports[`DatePicker renders correctly with focusIn 1`] = `
       />
     </div>
     <DaysChooser
-      currentDate={null}
+      currentDate={"1997-07-27T21:00:00.000Z"}
       onDateChange={[Function]}
     />
   </div>

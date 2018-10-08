@@ -30,61 +30,27 @@ describe('IntervalPicker', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('componentDidMount', () => {
+  it('handleStartDateChange', () => {
     const onStartDateChangeStub = jest.fn();
     const onEndDateChangeStub = jest.fn();
-    const startDate = moment('28/07/1997', format);
-    const endDate = moment('29/07/1997', format);
     const wrapper  = shallow(<IntervalPicker
       onStartDateChange={onStartDateChangeStub}
       onEndDateChange={onEndDateChangeStub}
-      startDate={startDate}
-      endDate={endDate}
-    />);
-
-    wrapper.instance().componentDidMount();
-    expect(onStartDateChangeStub).toBeCalledWith(startDate);
-    expect(onEndDateChangeStub).toBeCalledWith(endDate);
-  });
-
-  it('handleStartDateChange', () => {
-    const onStartDateChangeStub = jest.fn();
-    const wrapper  = shallow(<IntervalPicker
-      onStartDateChange={onStartDateChangeStub}
     />);
     const instance = wrapper.instance();
     instance.endDatePickerRef.current = { focusIn: jest.fn() };
 
-    const execTestCase = (startDate, endDate, expectedEndDate = endDate) => {
-      instance.state.endDate = endDate;
+    const execTestCase = (startDate, endDate, endDateShouldBeCalled) => {
+      wrapper.setProps({ endDate });
       instance.handleStartDateChange(startDate);
       expect(onStartDateChangeStub).toBeCalledWith(startDate);
-      expect(instance.state.endDate).toBe(expectedEndDate);
-      expect(instance.endDatePickerRef.current.focusIn).toBeCalled();
+      endDateShouldBeCalled && expect(onEndDateChangeStub).toBeCalledWith(startDate);
+      setImmediate(() => {expect(instance.endDatePickerRef.current.focusIn).toBeCalled()});
       jest.clearAllMocks();
     };
 
     execTestCase(moment('28/07/1997', format), moment('29/07/1997', format));
-    execTestCase(moment('29/07/1997', format), moment('29/07/1997', format), null);
-    execTestCase(moment('30/07/1997', format), moment('29/07/1997', format), null);
-  });
-
-  it('handleEndDateChange', () => {
-    const onEndDateChangeStub = jest.fn();
-    const wrapper  = shallow(<IntervalPicker
-      onEndDateChange={onEndDateChangeStub}
-    />);
-    const instance = wrapper.instance();
-
-    const execTestCase = (newEndDate, expectedStateEndDate = newEndDate) => {
-      instance.handleEndDateChange(newEndDate);
-      expect(instance.state.endDate).toBe(expectedStateEndDate);
-      expect(onEndDateChangeStub).toBeCalledWith(newEndDate);
-      jest.clearAllMocks();
-    };
-
-    execTestCase(moment('28/07/1997', format));
-    execTestCase(moment('29/07/1997', format));
-    execTestCase(moment('30/07/1997', format));
+    execTestCase(moment('29/07/1997', format), moment('29/07/1997', format), true);
+    execTestCase(moment('30/07/1997', format), moment('29/07/1997', format), true);
   });
 });

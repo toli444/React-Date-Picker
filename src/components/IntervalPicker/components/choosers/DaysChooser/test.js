@@ -248,7 +248,7 @@ describe('DaysChooser', () => {
   });
 
   it('getCurrentDayClass', () => {
-    const wrapper = shallow(<DaysChooser currentDate={moment('28/07/1997', format)} />);
+    const wrapper = shallow(<DaysChooser currentDate={moment('20/07/1997', format)} />);
     const instance = wrapper.instance();
 
     expect(instance.getCurrentDayClass({value: moment('27/07/1997', format)})).toBe('');
@@ -273,6 +273,19 @@ describe('DaysChooser', () => {
     expect(instance.getBetweenDaysClass({value: getEndDate()})).toBe('selected');
     expect(instance.getBetweenDaysClass({value: getStartDate().add(1, 'day')})).toBe('selected');
     expect(instance.getBetweenDaysClass({value: getEndDate().subtract(1, 'day')})).toBe('selected');
+    expect(instance.getBetweenDaysClass({value: getStartDate().subtract(1, 'day')})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getEndDate().add(1, 'day')})).toBe('');
+    expect(instance.getBetweenDaysClass({})).toBe('');
+
+    wrapper.setProps({endDate: null});
+
+    expect(instance.getBetweenDaysClass({value: getStartDate()})).toBe('selected');
+    expect(instance.getBetweenDaysClass({value: getCurrentDate()})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getEndDate()})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getStartDate().add(1, 'day')})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getEndDate().subtract(1, 'day')})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getStartDate().subtract(1, 'day')})).toBe('');
+    expect(instance.getBetweenDaysClass({value: getEndDate().add(1, 'day')})).toBe('');
     expect(instance.getBetweenDaysClass({})).toBe('');
   });
 

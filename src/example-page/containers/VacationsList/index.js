@@ -42,7 +42,7 @@ const getVisibleVacations = (vacations, currentFilters) => {
 
 const VacationsList = ({vacations = [], currentFilters, format}) => (
   <div className="vacation-list">
-    <h3>Current vacations: </h3>
+    <h3>Vacations: </h3>
     <h6>(today is: {today.format(format)})</h6>
     {vacations.length > 0 ? (
       <ul>
@@ -55,7 +55,7 @@ const VacationsList = ({vacations = [], currentFilters, format}) => (
         )}
       </ul>
     ) : (
-      areFiltersApplied(currentFilters) ? '' : <h5>There are no any vacations yet</h5>
+      areFiltersApplied(currentFilters) ? '' : <h5><b>There are no any vacations yet</b></h5>
     )}
   </div>
 );
@@ -64,6 +64,7 @@ VacationsList.propTypes = {
   dispatch: PropTypes.func,
   vacations: PropTypes.array,
   format: PropTypes.string,
+  currentFilters: PropTypes.array,
 };
 
 const mapStateToProps = state => ({

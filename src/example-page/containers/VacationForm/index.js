@@ -1,88 +1,59 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React from 'react'
 import PropTypes from 'prop-types';
-import {addVacation} from '../../actions/index';
 import IntervalPicker from '../../../components/IntervalPicker/index';
+import withFormLogic from './withFormLogic';
 
 import styles from './styles.less';
 
-class VacationForm extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func,
-    format: PropTypes.string,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: '',
-      startDate: null,
-      endDate: null,
-    };
-
-    this.baseState = this.state
-  }
-
-  resetForm = () => {
-    this.setState(this.baseState)
-  };
-
-  handleNameChange = value => {
-    this.setState({name: value});
-  };
-
-  handleStartDateChange = value => {
-    this.setState({startDate: value});
-  };
-
-  handleEndDateChange = value => {
-    this.setState({endDate: value});
-  };
-
-  handleFormSubmit = e => {
-    e.preventDefault();
-
-    this.props.dispatch(addVacation(this.state));
-    this.resetForm();
-  };
-
-  isSaveButtonDisabled() {
-    const {name, startDate, endDate} = this.state;
-
-    return !name.trim() || !startDate || !endDate;
-  }
-
-  render() {
-    const {name, startDate, endDate} = this.state;
-
-    return (
-      <div className={styles.form}>
-        <form
-          onSubmit={this.handleFormSubmit}
-        >
-          <div className={styles['form-element']}>
-            <label htmlFor="name">Name: </label>
-            <input className={styles.field} id="name" value={name}
-              onChange={e => this.handleNameChange(e.target.value)}
-            />
-          </div>
-          <div className={styles['form-element']}>
-            <IntervalPicker
-              startDate={startDate}
-              endDate={endDate}
-              onStartDateChange={this.handleStartDateChange}
-              onEndDateChange={this.handleEndDateChange}
-              format={this.props.format}
-            />
-          </div>
-          <button type="submit" className={styles.submit} disabled={this.isSaveButtonDisabled()}>
-            Save vacation
-          </button>
-        </form>
+const VacationForm = ({
+  name,
+  handleNameChange,
+  startDate,
+  handleStartDateChange,
+  endDate,
+  handleEndDateChange,
+  handleSubmit,
+  format,
+  isFormValid,
+}) => (
+  <div className={styles.form}>
+    <form
+      onSubmit={handleSubmit}
+    >
+      <div className={styles['form-element']}>
+        <label htmlFor="name">Name: </label>
+        <input
+          className={styles.field} id="name"
+          value={name}
+          onChange={e => handleNameChange(e.target.value)}
+        />
       </div>
-    )
-  }
-}
+      <div className={styles['form-element']}>
+        <IntervalPicker
+          startDate={startDate}
+          endDate={endDate}
+          onStartDateChange={handleStartDateChange}
+          onEndDateChange={handleEndDateChange}
+          format={format}
+        />
+      </div>
+      <button type="submit" className={styles.submit} disabled={isFormValid()}>
+        Save vacation
+      </button>
+    </form>
+  </div>
+);
 
-export default connect()(VacationForm)
+VacationForm.propTypes = {
+  name: PropTypes.string,
+  handleNameChange: PropTypes.func,
+  startDate: PropTypes.object,
+  handleStartDateChange: PropTypes.func,
+  endDate: PropTypes.object,
+  handleEndDateChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  format: PropTypes.string,
+  isFormValid: PropTypes.func,
+};
+
+export default withFormLogic(VacationForm)

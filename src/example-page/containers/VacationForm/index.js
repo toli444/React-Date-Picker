@@ -45,6 +45,7 @@ const VacationForm = ({
 );
 
 VacationForm.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string,
   handleNameChange: PropTypes.func,
   startDate: PropTypes.object,

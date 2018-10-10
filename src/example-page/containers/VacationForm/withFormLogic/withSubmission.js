@@ -1,10 +1,14 @@
 import {withHandlers} from "recompose";
-import {addVacation} from "../../../actions";
+import {addVacation, updateVacation} from "../../../actions";
 
-const handleSubmit = ({name, startDate, endDate, dispatch, resetForm, history}, e) => {
+const handleSubmit = ({id, name, startDate, endDate, dispatch, resetForm, history}, e) => {
   e.preventDefault();
 
-  dispatch(addVacation({name, startDate, endDate}));
+  if (id) {
+    dispatch(updateVacation({id, name, startDate, endDate}));
+  } else {
+    dispatch(addVacation({name, startDate, endDate}));
+  }
   resetForm();
   cancelForm(history);
 };

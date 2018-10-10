@@ -5,6 +5,16 @@ export const addVacation = payload => ({
   payload: {id: nextVacationId++, ...payload},
 });
 
+export const updateVacation = payload => ({
+  type: 'UPDATE_VACATION',
+  payload
+});
+
+export const deleteVacation = payload => ({
+  type: 'DELETE_VACATION',
+  payload
+});
+
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',
   filter

@@ -1,14 +1,9 @@
 const vacations = (state = [], {type, payload}) => {
   switch (type) {
     case 'ADD_VACATION':
-      return [
-        ...state, {
-          id: payload.id,
-          name: payload.name,
-          startDate: payload.startDate.clone(),
-          endDate: payload.endDate.clone(),
-        }
-      ];
+      return state.concat(payload);
+    case 'UPDATE_VACATION':
+      return state.map(vacation => vacation.id === payload.id ? {...vacation, ...payload}: vacation);
     default:
       return state;
   }

@@ -12,8 +12,7 @@ const AppRouter = () => (
         <NavLink to="/example" activeClassName="active" exact>Real Example</NavLink>
       </nav>
       <Route exact path="/" component={MainPage} />
-      <Route exact path="/example" component={ExamplePage} />
-      <Route exact path="/example/vacation/:id" component={ExamplePage} />
+      <Route exact path={['/example', '/example/vacation/:id']} component={ExamplePage} />
     </div>
   </Router>
 );

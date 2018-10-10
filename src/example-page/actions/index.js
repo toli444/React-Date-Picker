@@ -1,4 +1,4 @@
-let nextVacationId = 0;
+let nextVacationId = 1;
 
 export const addVacation = payload => ({
   type: 'ADD_VACATION',

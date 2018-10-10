@@ -15,6 +15,8 @@ const VacationForm = ({
   handleSubmit,
   format,
   isFormValid,
+  resetForm,
+  cancelForm,
 }) => (
   <div className={styles.form}>
     <form
@@ -37,9 +39,13 @@ const VacationForm = ({
           format={format}
         />
       </div>
-      <button type="submit" className={styles.submit} disabled={isFormValid()}>
-        Save vacation
-      </button>
+      <div className={styles.buttons}>
+        <button type="submit" disabled={isFormValid()}>
+          Save vacation
+        </button>
+        <button type="button" onClick={resetForm}>Reset</button>
+        <button type="button" onClick={cancelForm}>Cancel</button>
+      </div>
     </form>
   </div>
 );
@@ -55,6 +61,8 @@ VacationForm.propTypes = {
   handleSubmit: PropTypes.func,
   format: PropTypes.string,
   isFormValid: PropTypes.func,
+  resetForm: PropTypes.func,
+  cancelForm: PropTypes.func,
 };
 
 export default withFormLogic(VacationForm)

@@ -13,7 +13,7 @@ const AppRouter = () => (
       </nav>
       <Route exact path="/" component={MainPage} />
       <Route exact path="/example" component={ExamplePage} />
-      <Route exact path="/example/:id" component={ExamplePage} />
+      <Route exact path="/example/vacation/:id" component={ExamplePage} />
     </div>
   </Router>
 );
